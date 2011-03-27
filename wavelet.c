@@ -94,7 +94,7 @@ void destroyWavelet(waveletContainer *wavelet){
 	// Free the input
 	free(wavelet->input);
 	// Free the bands
-	int numBands = wavelet->length / 2;
+	int numBands = logBase2(wavelet->length);
 	for(int i = 0; i < numBands; ++i){
 		free(wavelet->bands[i]);
 	}
