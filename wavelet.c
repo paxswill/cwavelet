@@ -33,6 +33,7 @@ waveletContainer * createWavelet(double *input, int length, int wavelet){
 		// Haar Wavelet
 		container->wavelet = haar_wavelet;
 		container->scaling = haar_scaling;
+		container->stride = 2;
 	}
 	// Pad to a value of 2^n
 	int l2 = logBase2(length);
@@ -41,7 +42,7 @@ waveletContainer * createWavelet(double *input, int length, int wavelet){
 		paddedLength<<=1;
 	}
 	double *realInput = (double *)malloc(sizeof(double) * paddedLength);
-	memcpy(realInput, input, length);
+	memcpy(realInput, input, sizeof(double) * paddedLength);
 	// Fill in the rest with zeros
 	for(int i = length; i < paddedLength; ++i){
 		realInput[i] = 0;
@@ -49,10 +50,11 @@ waveletContainer * createWavelet(double *input, int length, int wavelet){
 	container->input = realInput;
 	container->length = paddedLength;
 	// Create the output bands
-	int numBands = paddedLength / 2;
-	double **bands = (double **)malloc(numBands * sizeof(double *));
-	for(int i = 0; i < numBands; ++i){
-		double *band = calloc(pow(2, i), sizeof(double));
+	double **bands = (double **)malloc(l2 * sizeof(double *));
+	for(int i = 0; i < l2; ++i){
+		int length = pow(2, i);
+		double *band = calloc(length, sizeof(double));
+		bands[i] = band;
 	}
 	container->bands = bands;
 	return container;
@@ -69,3 +71,30 @@ void destroyWavelet(waveletContainer *wavelet){
 	free(wavelet->bands);
 	free(wavelet);
 }
+
+void runWavelet(waveletContainer *wavelet){
+	recursiveWavelet(wavelet, wavelet->input, logBase2(wavelet->length));
+}
+
+void recursiveWavelet(waveletContainer *container, double *input, int currentBand){
+	int currentLength = pow(2, currentBand);
+	double *scalingFactors = (double *)malloc(sizeof(double) * (currentLength / 2));
+	// GO through the input array, jumping stride elements each step
+	for(int i  = 0; i < currentLength; i += container->stride){
+		int position = i / container->stride;
+		// Create the wavelet coeffcients for this band
+		double value = container->wavelet(input + i);
+		container->bands[currentBand - 1][position] = value;
+		// Create the scaling coeffcients for this band
+		scalingFactors[position] = container->scaling(input + i);
+	}
+	// Run the next step
+	int nextLength = logBase2(pow(2, currentBand - 1));
+	printf("Next length: %d\n", nextLength);
+	if(nextLength > 1){
+		recursiveWavelet(container, scalingFactors, nextLength);
+		free(scalingFactors);
+	}
+}
+
+

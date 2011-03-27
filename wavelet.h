@@ -16,11 +16,14 @@ typedef struct{
 	double *input;
 	int length;
 	double **bands;
+	int stride;
 } waveletContainer;
 
 int logBase2(uint32_t num);
 waveletContainer * createWavelet(double *input, int length, int wavelet);
 void destroyWavelet(waveletContainer *wavelet);
+void runWavelet(waveletContainer *wavelet);
+void recursiveWavelet(waveletContainer *container, double *input, int currentBand);
 
 
 #endif /* end of include guard: WAVELET_H_DWTGN12K */
