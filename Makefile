@@ -17,6 +17,9 @@ testing.o: tests.c haar.o wavelet.o daubechies.o
 test: testing.o
 	./testing.o
 
+debug-test: testing.o
+	gdb testing.o
+
 all: wavelet.o haar.o testing.o daubechies.o
 
 clean:
