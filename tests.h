@@ -10,10 +10,11 @@ static double errorValue;
 int main(int arcg, char **argv);
 int testAll();
 
-// Haar tests
-int testHaarWave();
-int testHaarScale();
+// Haar
 int testHaar();
+
+// Daubechies
+int testDaubechies();
 
 // Wavelet tests
 int testLog2();
