@@ -1,5 +1,5 @@
 CC=clang
-CFLAGS=-g -O0
+CFLAGS=-ggdb -O0
 
 
 wavelet.o: wavelet.c haar.o
