@@ -17,5 +17,6 @@ int testHaar();
 
 // Wavelet tests
 int testLog2();
+void testWave();
 
 #endif /* end of include guard: TESTS_H_53CI45QC */

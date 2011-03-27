@@ -16,70 +16,14 @@ int main(int arcg, char **argv){
 }
 
 int testAll(){
+	testWave();
 	return testHaar() && testLog2();
 }
 
-// Haar tests
-int testHaarWave(){
-	if(haar_wavelet(-1.0) != 0.0){
-		errorValue = haar_wavelet(-1.0);
-		errorMessage = "Haar Wavelet function for -1.0";
-		return FALSE;
-	}else if(haar_wavelet(-0.0) != 1.0){
-		errorValue = haar_wavelet(-0.0);
-		errorMessage = "Haar Wavelet function for -0.0";
-		return FALSE;
-	}else if(haar_wavelet(0.25) != 1.0){
-		errorValue = haar_wavelet(0.25);
-		errorMessage = "Haar Wavelet function for 0.25";
-		return FALSE;
-	}else if(haar_wavelet(0.5) != -1.0){
-		errorValue = haar_wavelet(0.5);
-		errorMessage = "Haar Wavelet function for 0.5";
-		return FALSE;
-	}else if(haar_wavelet(0.75) != -1.0){
-		errorValue = haar_wavelet(0.75);
-		errorMessage = "Haar Wavelet function for 0.75";
-		return FALSE;
-	}else if(haar_wavelet(1.0) != 0.0){
-		errorValue = haar_wavelet(1.0);
-		errorMessage = "Haar Wavelet function for 1.0";
-		return FALSE;
-	}else if(haar_wavelet(HUGE_VAL) != 0.0){
-		errorValue = haar_wavelet(HUGE_VAL);
-		errorMessage = "Haar Wavelet function for infinty";
-		return FALSE;
-	}
-	return TRUE;
-}
-
-int testHaarScale(){
-	if(haar_scaling(-1.0) != 0){
-		errorValue = haar_scaling(-1.0);
-		errorMessage = "Haar Scale function for -1.0";
-		return FALSE;
-	}else if(haar_scaling(0.0) != 1){
-		errorValue = haar_scaling(0.0);
-		errorMessage = "Haar Scale function for 0.0";
-		return FALSE;
-	}else if(haar_scaling(-0.0) != 1){
-		errorValue = haar_scaling(-0.0);
-		errorMessage = "Haar Scale function for -0.0";
-		return FALSE;
-	}else if(haar_scaling(0.25) != 1){
-		errorValue = haar_scaling(0.25);
-		errorMessage = "Haar Scale function for 0.25";
-		return FALSE;
-	}else if(haar_scaling(1.0) != 0){
-		errorValue = haar_scaling(1.0);
-		errorMessage = "Haar Scale function for 1.0";
-		return FALSE;
-	}
-	return TRUE;
-}
 
 int testHaar(){
-	return testHaarScale() && testHaarWave();
+	//return testHaarScale() && testHaarWave();
+	return TRUE;
 }
 
 int testLog2(){
@@ -94,3 +38,28 @@ int testLog2(){
 	}
 	return TRUE;
 }
+
+void testWave(){
+	double input[16] = 
+	/*{
+		19770.0, 1965.0, 90.0, 28257.0,
+		24564.0, 16716.0, 12115.0, 7514.0,
+		13411.0, 25648.0, 8752.0, 4151.0, 
+		32318.0, 29534.0, 4480.0, 10782.0 
+	};*/
+	 { 32.0, 10.0, 20.0, 38.0,
+			 37.0, 28.0, 38.0, 34.0,
+			 18.0, 24.0, 18.0, 9.0, 
+			23.0, 24.0, 28.0, 34.0 };
+	waveletContainer *c = createWavelet(input, 16, HAAR_WAVELET);
+	runWavelet(c);
+	for(int i = 0; i < logBase2(c->length); ++i){
+		int currLength = pow(2, i);
+		for(int j = 0; j < currLength; ++j){
+			printf("[%d][%d] = %f\n", i, j, c->bands[i][j]);
+		}
+		printf("\n");
+	}
+}
+
+
