@@ -135,7 +135,7 @@ double * createPaddedInput(double *unpadded, int length, int padding){
 	// Create the new array
 	double *padded = (double *)malloc(sizeof(double) * (length + padding + padding));
 	// Copy the old data in
-	memcpy(padded + padding, unpadded, length);
+	memcpy(padded + padding, unpadded, length * sizeof(double));
 	// Fill in the padding
 	for(int i = 0; i < padding; ++i){
 		// Front
