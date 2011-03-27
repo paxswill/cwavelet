@@ -7,8 +7,8 @@
 #include <math.h>
 #include "haar.h"
 
-typedef double (*waveletFunction)(double);
-typedef double (*scalingFunction)(double);
+typedef double (*waveletFunction)(double *);
+typedef double (*scalingFunction)(double*);
 
 typedef struct{
 	waveletFunction wavelet;
