@@ -3,17 +3,18 @@
 
 #include <stdlib.h>
 #include <stdint.h>
+#include <string.h>
+#include <math.h>
 #include "haar.h"
 
 typedef double (*waveletFunction)(double);
 typedef double (*scalingFunction)(double);
-typedef const int waveletName;
 
 typedef struct{
 	waveletFunction wavelet;
 	scalingFunction scaling;
 	double *inputVector;
-	int size;
+	int length;
 	double *outputVector;
 } waveletContainer;
 
@@ -21,5 +22,6 @@ typedef struct{
 waveletContainer createWavelet();
 
 int logBase2(uint32_t num);
+waveletContainer createWavelet(double *input, int length, int wavelet);
 
 #endif /* end of include guard: WAVELET_H_DWTGN12K */

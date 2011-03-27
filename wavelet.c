@@ -25,3 +25,29 @@ int logBase2(uint32_t num){
 	num |= num >> 16;
 	return DeBruijn[(uint32_t)(num * 0x07C4ACDDU) >> 27];
 }
+
+
+waveletContainer createWavelet(double *input, int length, int wavelet){
+	waveletContainer container;
+	if(wavelet == HAAR_WAVELET){
+		// Haar Wavelet
+		container.wavelet = haar_wavelet;
+		container.scaling = haar_scaling;
+	}
+	// Pad to a value of 2^n
+	int l2 = logBase2(length);
+	int paddedLength = pow(2, l2);
+	if(l2 > paddedLength){
+		paddedLength<<=1;
+	}
+	double *realInput = (double *)malloc(sizeof(double) * paddedLength);
+	memcpy(realInput, input, length);
+	// Fill in the rest with zeros
+	for(int i = length; i < paddedLength; ++i){
+		realInput[i] = 0;
+	}
+	container.inputVector = realInput;
+	container.length = paddedLength;
+	container.outputVector = (double *)calloc(paddedLength, sizeof(double));
+	return container;
+}
