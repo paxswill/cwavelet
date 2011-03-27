@@ -8,11 +8,15 @@
 int main(int arcg, char **argv){
 	errorMessage = "";
 	errorValue = 1337;
-	if(!testHaar()){
+	if(!testAll()){
 		printf("Test Failed: %s with value: %f\n", errorMessage, errorValue);
 	}else{
 		printf("Tests Passed\n");
 	}
+}
+
+int testAll(){
+	return testHaar() && testLog2();
 }
 
 // Haar tests
@@ -56,4 +60,16 @@ int testHaarScale(){
 
 int testHaar(){
 	return testHaarScale() && testHaarWave();
+}
+
+int testLog2(){
+	int position = 32;
+	for(int i = 0x100000000; i > 0; i >>= 1){
+		if(logBase2(i) != position){
+			errorValue = logBase2(i);
+			errorMessage = "logBase2 Failed";
+		}
+		--position;
+	}
+	return TRUE;
 }

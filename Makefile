@@ -8,8 +8,8 @@ wavelet.o: wavelet.c haar.o
 haar.o: haar.c
 	$(CC) $(CFLAGS) -c haar.c -o haar.o
 
-testing.o: tests.c haar.o
-	$(CC) $(CFLAGS) tests.c haar.o -o testing.o
+testing.o: tests.c haar.o wavelet.o
+	$(CC) $(CFLAGS) tests.c haar.o wavelet.o -o testing.o
 
 test: testing.o
 	./testing.o

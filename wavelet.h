@@ -1,6 +1,8 @@
 #ifndef WAVELET_H_DWTGN12K
 #define WAVELET_H_DWTGN12K
 
+#include <stdlib.h>
+#include <stdint.h>
 #include "haar.h"
 
 typedef double (*waveletFunction)(double);
@@ -18,5 +20,6 @@ typedef struct{
 
 waveletContainer createWavelet();
 
+int logBase2(uint32_t num);
 
 #endif /* end of include guard: WAVELET_H_DWTGN12K */
