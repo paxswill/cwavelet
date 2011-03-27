@@ -8,7 +8,7 @@ static char *errorMessage;
 static double errorValue;
 
 int main(int arcg, char **argv);
-int testAll();
+void testFail();
 
 // Haar
 int testHaar();

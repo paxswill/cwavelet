@@ -24,15 +24,20 @@ const double test2[16] =
 int main(int arcg, char **argv){
 	errorMessage = "";
 	errorValue = 1337;
-	if(!testAll()){
-		printf("Test Failed: %s with value: %f\n", errorMessage, errorValue);
-	}else{
+	int allPassed = TRUE;
+	allPassed = testLog2() ? allPassed : FALSE;
+	allPassed = testHaar() ? allPassed : FALSE;
+	allPassed = testDaubechies() ? allPassed : FALSE;
+	
+	if(allPassed){
 		printf("Tests Passed\n");
+	}else{
+		printf("Some tests failed,  check the error log\n");
 	}
 }
 
-int testAll(){
-	return testLog2() && testHaar() && testDaubechies();
+void testFail(){
+	printf("Test Failed: %s with value: %f\n", errorMessage, errorValue);
 }
 
 int testLog2(){
@@ -49,17 +54,27 @@ int testLog2(){
 }
 
 int testHaar(){
+	// Expected responses
+	double band10[1] = {3.6875};
+	double band11[2] = {-4.625, -5.0};
+	double band12[4] = {-4.0, -1.75, 3.75, -3.75};
+	double band13[8] = {11.0, -9.0, 4.5, 2.0, -3.0, 4.5, -0.5, -3.0};
+	double *testBands1[4] = {band10, band11, band12, band13};
+	// Testing
 	waveletContainer *c = createWavelet((double *)test1, 16, HAAR_WAVELET);
 	transform(c);
+	int correct = TRUE;
 	for(int i = 0; i < logBase2(c->length); ++i){
 		int currLength = pow(2, i);
 		for(int j = 0; j < currLength; ++j){
-			printf("[%d][%d] = %f\n", i, j, c->bands[i][j]);
+			if(c->bands[i][j] != testBands1[i][j]){
+				correct = FALSE;
+				printf("Incorrect for Haar, test1: [%d][%d] = %f, not %f\n", i, j, c->bands[i][j], testBands1[i][j]);
+			}
 		}
-		printf("\n");
 	}
 	destroyWavelet(c);
-	return TRUE;
+	return correct;
 }
 
 int testDaubechies(){
