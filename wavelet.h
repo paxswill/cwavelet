@@ -7,6 +7,7 @@
 #include <math.h>
 #include "haar.h"
 
+// Wavelet and scaling funtions
 typedef double (*waveletFunction)(double *);
 typedef double (*scalingFunction)(double*);
 
@@ -25,5 +26,6 @@ void destroyWavelet(waveletContainer *wavelet);
 void transform(waveletContainer *wavelet);
 void recursiveTransform(waveletContainer *container, double *input, int currentBand);
 
+double * createPaddedInput(double *unpadded, int length, int padding);
 
 #endif /* end of include guard: WAVELET_H_DWTGN12K */
