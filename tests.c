@@ -54,7 +54,27 @@ int testHaarWave(){
 }
 
 int testHaarScale(){
-	
+	if(haar_scaling(-1.0) != 0){
+		errorValue = haar_scaling(-1.0);
+		errorMessage = "Haar Scale function for -1.0";
+		return FALSE;
+	}else if(haar_scaling(0.0) != 1){
+		errorValue = haar_scaling(0.0);
+		errorMessage = "Haar Scale function for 0.0";
+		return FALSE;
+	}else if(haar_scaling(-0.0) != 1){
+		errorValue = haar_scaling(-0.0);
+		errorMessage = "Haar Scale function for -0.0";
+		return FALSE;
+	}else if(haar_scaling(0.25) != 1){
+		errorValue = haar_scaling(0.25);
+		errorMessage = "Haar Scale function for 0.25";
+		return FALSE;
+	}else if(haar_scaling(1.0) != 0){
+		errorValue = haar_scaling(1.0);
+		errorMessage = "Haar Scale function for 1.0";
+		return FALSE;
+	}
 	return TRUE;
 }
 
