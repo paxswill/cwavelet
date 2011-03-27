@@ -88,6 +88,7 @@ int testLog2(){
 		if(logBase2(i) != position){
 			errorValue = logBase2(i);
 			errorMessage = "logBase2 Failed";
+			return FALSE;
 		}
 		--position;
 	}
