@@ -27,12 +27,12 @@ int logBase2(uint32_t num){
 }
 
 
-waveletContainer createWavelet(double *input, int length, int wavelet){
-	waveletContainer container;
+waveletContainer * createWavelet(double *input, int length, int wavelet){
+	waveletContainer *container = (waveletContainer *)malloc(sizeof(waveletContainer));
 	if(wavelet == HAAR_WAVELET){
 		// Haar Wavelet
-		container.wavelet = haar_wavelet;
-		container.scaling = haar_scaling;
+		container->wavelet = haar_wavelet;
+		container->scaling = haar_scaling;
 	}
 	// Pad to a value of 2^n
 	int l2 = logBase2(length);
@@ -46,8 +46,26 @@ waveletContainer createWavelet(double *input, int length, int wavelet){
 	for(int i = length; i < paddedLength; ++i){
 		realInput[i] = 0;
 	}
-	container.inputVector = realInput;
-	container.length = paddedLength;
-	container.outputVector = (double *)calloc(paddedLength, sizeof(double));
+	container->input = realInput;
+	container->length = paddedLength;
+	// Create the output bands
+	int numBands = paddedLength / 2;
+	double **bands = (double **)malloc(numBands * sizeof(double *));
+	for(int i = 0; i < numBands; ++i){
+		double *band = calloc(pow(2, i), sizeof(double));
+	}
+	container->bands = bands;
 	return container;
+}
+
+void destroyWavelet(waveletContainer *wavelet){
+	// Free the input
+	free(wavelet->input);
+	// Free the bands
+	int numBands = wavelet->length / 2;
+	for(int i = 0; i < numBands; ++i){
+		free(wavelet->bands[i]);
+	}
+	free(wavelet->bands);
+	free(wavelet);
 }

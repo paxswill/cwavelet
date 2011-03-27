@@ -13,15 +13,14 @@ typedef double (*scalingFunction)(double);
 typedef struct{
 	waveletFunction wavelet;
 	scalingFunction scaling;
-	double *inputVector;
+	double *input;
 	int length;
-	double *outputVector;
+	double **bands;
 } waveletContainer;
 
-
-waveletContainer createWavelet();
-
 int logBase2(uint32_t num);
-waveletContainer createWavelet(double *input, int length, int wavelet);
+waveletContainer * createWavelet(double *input, int length, int wavelet);
+void destroyWavelet(waveletContainer *wavelet);
+
 
 #endif /* end of include guard: WAVELET_H_DWTGN12K */
