@@ -72,11 +72,11 @@ void destroyWavelet(waveletContainer *wavelet){
 	free(wavelet);
 }
 
-void runWavelet(waveletContainer *wavelet){
-	recursiveWavelet(wavelet, wavelet->input, logBase2(wavelet->length));
+void transform(waveletContainer *wavelet){
+	recursiveTransform(wavelet, wavelet->input, logBase2(wavelet->length));
 }
 
-void recursiveWavelet(waveletContainer *container, double *input, int currentBand){
+void recursiveTransform(waveletContainer *container, double *input, int currentBand){
 	int currentLength = pow(2, currentBand);
 	double *scalingFactors = (double *)malloc(sizeof(double) * (currentLength / 2));
 	// GO through the input array, jumping stride elements each step
@@ -92,7 +92,7 @@ void recursiveWavelet(waveletContainer *container, double *input, int currentBan
 	int nextLength = logBase2(pow(2, currentBand - 1));
 	printf("Next length: %d\n", nextLength);
 	if(nextLength > 1){
-		recursiveWavelet(container, scalingFactors, nextLength);
+		recursiveTransform(container, scalingFactors, nextLength);
 		free(scalingFactors);
 	}
 }
