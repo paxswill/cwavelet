@@ -2,7 +2,7 @@
 #define HAAR_H_VZI4HXRC
 
 #include "wavelet.h"
-waveletName HAAR_WAVELET = 3919;
+#define HAAR_WAVELET 7142
 
 double haar_wavelet(double v);
 double haar_scaling(double v);
