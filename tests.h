@@ -6,6 +6,7 @@
 #include <stdbool.h>
 #include "haar.h"
 #include "wavelet.h"
+#include "circ_array.h"
 
 static char *errorMessage;
 static double errorValue;
@@ -22,4 +23,6 @@ bool testDaubechies();
 // Wavelet tests
 bool testLog2();
 
+// Array tests
+bool testCircPiecewise();
 #endif /* end of include guard: TESTS_H_53CI45QC */
