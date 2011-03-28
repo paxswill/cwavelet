@@ -1,5 +1,5 @@
 CC=clang
-CFLAGS=-ggdb -O0
+CFLAGS=-ggdb -O0 -Wall -std=c99
 
 
 wavelet.o: wavelet.c
