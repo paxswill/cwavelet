@@ -11,6 +11,7 @@ typedef struct{
 
 // Creation/Destruction
 circular_array * createArray(int length);
+circular_array * createArrayFromArray(int length, double *arr);
 void destroyArray(circular_array *arr);
 
 // Access

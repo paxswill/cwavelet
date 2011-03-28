@@ -8,6 +8,12 @@ circular_array * createArray(int length){
 	return arr;
 }
 
+circular_array * createArrayFromArray(int length, double *arr){
+	circular_array *c = createArray(length);
+	memcpy(c->arr, arr, sizeof(double) * length);
+	return c;
+}
+
 void destroyArray(circular_array *arr){
 	free(arr->arr);
 	free(arr);
