@@ -35,27 +35,22 @@ waveletContainer * createWavelet(double *input, int length, int wavelet){
 		container->wavelet = haar_wavelet;
 		container->scaling = haar_scaling;
 		container->stride = 2;
-		container->padding = 0;
 	}else if(wavelet == DAUBECHIES_4_WAVELET){
 		container->wavelet = daubechies_4_wavelet;
 		container->scaling = daubechies_4_scaling;
 		container->stride = 2;
-		container->padding = 2;
 	}else if(wavelet == DAUBECHIES_6_WAVELET){
 		container->wavelet = daubechies_6_wavelet;
 		container->scaling = daubechies_6_scaling;
 		container->stride = 2;
-		container->padding = 4;
 	}else if(wavelet == DAUBECHIES_8_WAVELET){
 		container->wavelet = daubechies_8_wavelet;
 		container->scaling = daubechies_8_scaling;
 		container->stride = 2;
-		container->padding = 6;
 	}else if(wavelet == DAUBECHIES_10_WAVELET){
 		container->wavelet = daubechies_10_wavelet;
 		container->scaling = daubechies_10_scaling;
 		container->stride = 2;
-		container->padding = 8;
 	}
 	// Pad to a value of 2^n
 	int l2 = logBase2(length);
@@ -63,22 +58,14 @@ waveletContainer * createWavelet(double *input, int length, int wavelet){
 	if(l2 > base2Length){
 		base2Length<<=1;
 	}
-	double *realInput;
-	realInput = (double *)malloc(sizeof(double) * base2Length);
-	memcpy(realInput, input, sizeof(double) * base2Length);
+	circular_array *arr = createArrayFromArray(length, input);
+	ca_resize(arr, base2Length);
 	// Fill in the rest with zeros
 	for(int i = length; i < base2Length; ++i){
-		realInput[i] = 0;
+		ca_set(arr, i, 0.0);
 	}
-	// In the case of the D* wavelets, we need to add some overflow so we 
-	// don't get null pointers when they go off the far edge (have them act periodic)
-	if(container->padding != 0){
-		double *newInput = createPaddedInput(realInput, base2Length, container->padding);
-		free(realInput);
-		realInput = newInput;
-	}
-	container->input = realInput;
-	container->length = base2Length + (container->padding * 2);
+	container->input = arr;
+	container->length = base2Length;
 	// Create the output bands
 	double **bands = (double **)malloc(l2 * sizeof(double *));
 	for(int i = 0; i < l2; ++i){
