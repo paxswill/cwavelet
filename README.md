@@ -41,6 +41,8 @@ This frees all memory associated with the container.
 
     destroyWavelet(container);
 
+For further examples, I suggest perusing `tests.c`, as I am aiming for 100% unit test coverage.
+
 ## Extending
 
 To add additional wavelets, there are a few steps you should take. First, 
