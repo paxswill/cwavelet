@@ -23,8 +23,23 @@ circular_array * createArrayFromArray(int length, double *arr){
 	return c;
 }
 
+circular_array * copyArray(circular_array *arr){
+	return createArrayFromArray(arr->length, arr->arr);
+}
+
+circular_array * createArrayfromArrayNoCopy(int length, double *arr){
+	circular_array *c = (circular_array *)malloc(sizeof(circular_array));
+	c->length = length;
+	c->arr = arr;
+	return c;
+}
+
 void destroyArray(circular_array *arr){
 	free(arr->arr);
+	free(arr);
+}
+
+void destroyNoCopyArray(circular_array *arr){
 	free(arr);
 }
 
@@ -56,3 +71,13 @@ void ca_resize(circular_array *arr, int newSize){
 	}
 }
 
+// Printing
+void ca_print(circular_array *arr){
+	ca_fprint(arr, stdout);
+}
+
+void ca_fprint(circular_array *arr, FILE *f){
+	for(int i = 0; i < arr->length; ++i){
+		fprintf(f, "arr[%3d] = % 3.8f\n", i, arr->arr[i]);
+	}
+}
