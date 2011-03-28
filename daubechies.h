@@ -29,6 +29,4 @@ double daubechies_8_scaling(circular_array *arr, int i);
 double daubechies_10_wavelet(circular_array *arr, int i);
 double daubechies_10_scaling(circular_array *arr, int i);
 
-double * generateCoeffcients(int num);
-
 #endif /* end of include guard: DAUBECHIES_H_4IFSHX8 */
