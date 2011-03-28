@@ -2,7 +2,7 @@
 #define DAUBECHIES_H_4IFSHX8
 
 #include <stdlib.h>
-#include "wavelet.h"
+#include "circ_array.h"
 #include "haar.h"
 
 #define DAUBECHIES_2_WAVELET 32036
@@ -11,23 +11,23 @@
 #define DAUBECHIES_8_WAVELET 23163
 #define DAUBECHIES_10_WAVELET 26856
 
-double computeGeneralDaubechiesScaling(const double *coeffs, int num, double *v);
-double computeGeneralDaubechiesWavelet(const double *coeffs, int num, double *v);
+double computeGeneralDaubechiesScaling(const double *coeffs, int daubechiesNum, circular_array *arr, int i);
+double computeGeneralDaubechiesWavelet(const double *coeffs, int daubechiesNum, circular_array *arr, int i);
 
-double daubechies_2_wavelet(double *v);
-double daubechies_2_scaling(double *v);
+double daubechies_2_wavelet(circular_array *arr, int i);
+double daubechies_2_scaling(circular_array *arr, int i);
 
-double daubechies_4_wavelet(double *v);
-double daubechies_4_scaling(double *v);
+double daubechies_4_wavelet(circular_array *arr, int i);
+double daubechies_4_scaling(circular_array *arr, int i);
 
-double daubechies_6_wavelet(double *v);
-double daubechies_6_scaling(double *v);
+double daubechies_6_wavelet(circular_array *arr, int i);
+double daubechies_6_scaling(circular_array *arr, int i);
 
-double daubechies_8_wavelet(double *v);
-double daubechies_8_scaling(double *v);
+double daubechies_8_wavelet(circular_array *arr, int i);
+double daubechies_8_scaling(circular_array *arr, int i);
 
-double daubechies_10_wavelet(double *v);
-double daubechies_10_scaling(double *v);
+double daubechies_10_wavelet(circular_array *arr, int i);
+double daubechies_10_scaling(circular_array *arr, int i);
 
 double * generateCoeffcients(int num);
 
