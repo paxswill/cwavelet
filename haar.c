@@ -1,11 +1,11 @@
 #include "haar.h"
 
 
-double haar_wavelet(double *v){
-	return (v[0] - v[1]) / 2;
+double haar_wavelet(circular_array *arr, int i){
+	return (ca_get(i, arr) - ca_get(i + 1, arr)) / 2;
 }
 
-double haar_scaling(double *v){
-	return (v[0] + v[1]) / 2;
+double haar_scaling(circular_array *arr, int i){
+	return (ca_get(i, arr) + ca_get(i + 1, arr)) / 2;
 }
 

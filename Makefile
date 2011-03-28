@@ -5,10 +5,10 @@ CFLAGS=-ggdb -O0
 wavelet.o: wavelet.c
 	$(CC) $(CFLAGS) -c wavelet.c -o wavelet.o
 
-haar.o: haar.c
+haar.o: haar.c circ_array.o
 	$(CC) $(CFLAGS) -c haar.c -o haar.o
 
-daubechies.o: haar.o daubechies.c
+daubechies.o: daubechies.c haar.o
 	$(CC) $(CFLAGS) -c haar.o daubechies.c -o daubechies.o
 
 circ_array.o: circ_array.c
