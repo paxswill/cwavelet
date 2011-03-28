@@ -79,50 +79,38 @@ waveletContainer * createWavelet(double *input, int length, int wavelet){
 		ca_set(arr, i, 0.0);
 	}
 	container->input = arr;
-	// Copy the input to the working output
-	double *out = (double *)malloc(base2Length * sizeof(double));
-	memcpy(out, arr, base2Length * sizeof(double));
-	container->output = out;
+	// Copy the output as well
+	container->output = copyArray(container->input);
 	return container;
 }
 
 void destroyWavelet(waveletContainer *wavelet){
 	// Free the output
-	free(wavelet->out);
+	destroyArray(wavelet->output);
 	// Free the input
 	destroyArray(wavelet->input);
 	free(wavelet);
 }
 
-void transform(waveletContainer *wavelet){
-	recursiveTransform(wavelet, wavelet->input, logBase2(wavelet->input->length));
-}
-
-void recursiveTransform(waveletContainer *container, circular_array *input, int currentBand){
-	circular_array *scalingFactors = createArray(input->length / 2);
-	// Go through the input array, jumping (stride) elements each step
-	for(int i = 0; i < input->length; i += container->stride){
-		// Position in the scaling factors
-		int position = (i / container->stride);
-		// Create the wavelet coeffcients for this band
-		double waveVal = container->wavelet(input, i);
-		container->bands[currentBand - 1][position] = waveVal;
-		// Create the scaling coeffcients for this band
-		double scaleVal = container->scaling(input, i);
-		ca_set(scalingFactors, position, scaleVal);
-		printf("Wave: %3.8f\tScale: %3.8f\n", waveVal, scaleVal);
-	}
+void transform(waveletContainer *container){
+	// Implemented using the lifting scheme
+	printf("Initial value:\n");
+	ca_print(container->output);
 	printf("\n");
-	// Run the next step
-	int nextLength = currentBand - 1;
-	if(nextLength >= container->minimumData / 2){
-		recursiveTransform(container, scalingFactors, nextLength);
-	}else{
-		size_t size = sizeof(double) * container->minimumData / 2;
-		double *finals = malloc(size);
-		memcpy(finals, scalingFactors->arr, size);
-		container->finalScales = finals;
+	for(int i = container->input->length; i >= container->minimumData; i >>= 1){
+		int split = i >> 1;
+		circular_array *temp = createArrayfromArrayNoCopy(i, container->output->arr);
+		int k = 0;
+		for(int j = 0; j < i; j += container->stride){
+			double scaleVal = container->scaling(container->output, j);
+			double waveVal = container->wavelet(container->output, j);
+			ca_set(temp, j / 2, scaleVal);
+			ca_set(temp, j / 2 + split, waveVal);
+			++k;
+		}
+		destroyNoCopyArray(temp);
+		printf("For interation %d:\n", i);
+		ca_print(container->output);
+		printf("\n");
 	}
-	destroyArray(scalingFactors);
 }
-
