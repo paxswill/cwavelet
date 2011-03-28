@@ -125,7 +125,7 @@ void recursiveTransform(waveletContainer *container, double *input, int currentB
 	double *temp = createPaddedInput(scalingFactors, currentLength / 2, padding);
 	free(scalingFactors);
 	scalingFactors = temp;
-	if(nextLength > 1){
+	if(nextLength >= 1){
 		recursiveTransform(container, scalingFactors, nextLength);
 		free(scalingFactors);
 	}
