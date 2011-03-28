@@ -70,9 +70,9 @@ bool testHaar(){
 			}
 		}
 	}
-	if(finalScale != c->finalScale){
+	if(finalScale != c->finalScales[0]){
 		correct = false;
-		printf("Incorrect for Haar, test1, final scale output: %f. Supposed to be %f", c->finalScale, finalScale);
+		printf("Incorrect for Haar, test1, final scale output: %f. Supposed to be %f", c->finalScales[0], finalScale);
 	}
 	destroyWavelet(c);
 	return correct;
@@ -102,18 +102,18 @@ bool testCircPiecewise(){
 	for(int i = 0; i < 7; ++i){
 		if(ca_get(c, i) != i){
 			isCorrect = false;
-			printf("Failure in Circular array, piecewise, function access. Should be %d, is %d\n", i, ca_get(c, i));
+			printf("Failure in Circular array, piecewise, function access. Should be %d, is %f\n", i, ca_get(c, i));
 		}
 		if(c->arr[i] != i){
 			isCorrect = false;
-			printf("Failure in Circular array, piecewise, raw access. Should be %d, is %d\n", i, ca_get(c, i));
+			printf("Failure in Circular array, piecewise, raw access. Should be %d, is %f\n", i, ca_get(c, i));
 		}
 	}
 	for(int i = 7; i < 14; ++i){
 		double testVal = i - 7.0;
 		if(ca_get(c, i) != testVal){
 			isCorrect = false;
-			printf("Failure in Circular array, piecewise, function access, overflow. Should be %d, is %d\n", testVal, ca_get(c, i));
+			printf("Failure in Circular array, piecewise, function access, overflow. Should be %f, is %f\n", testVal, ca_get(c, i));
 		}
 	}
 	return isCorrect;

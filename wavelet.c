@@ -35,22 +35,27 @@ waveletContainer * createWavelet(double *input, int length, int wavelet){
 		container->wavelet = haar_wavelet;
 		container->scaling = haar_scaling;
 		container->stride = 2;
+		container->minimumData = 2;
 	}else if(wavelet == DAUBECHIES_4_WAVELET){
 		container->wavelet = daubechies_4_wavelet;
 		container->scaling = daubechies_4_scaling;
 		container->stride = 2;
+		container->minimumData = 4;
 	}else if(wavelet == DAUBECHIES_6_WAVELET){
 		container->wavelet = daubechies_6_wavelet;
 		container->scaling = daubechies_6_scaling;
 		container->stride = 2;
+		container->minimumData = 6;
 	}else if(wavelet == DAUBECHIES_8_WAVELET){
 		container->wavelet = daubechies_8_wavelet;
 		container->scaling = daubechies_8_scaling;
 		container->stride = 2;
+		container->minimumData = 8;
 	}else if(wavelet == DAUBECHIES_10_WAVELET){
 		container->wavelet = daubechies_10_wavelet;
 		container->scaling = daubechies_10_scaling;
 		container->stride = 2;
+		container->minimumData = 10;
 	}
 	// Pad to a value of 2^n
 	int l2 = logBase2(length);
@@ -72,6 +77,9 @@ waveletContainer * createWavelet(double *input, int length, int wavelet){
 		double *band = calloc(length, sizeof(double));
 		bands[i] = band;
 	}
+	// Create the output scales
+	double *finalScales = (double *)malloc(sizeof(double) * container->minimumData / 2);
+	container->finalScales = finalScales;
 	container->bands = bands;
 	return container;
 }
@@ -85,6 +93,7 @@ void destroyWavelet(waveletContainer *wavelet){
 	free(wavelet->bands);
 	// Free the input
 	destroyArray(wavelet->input);
+	free(wavelet->finalScales);
 	free(wavelet);
 }
 
@@ -107,10 +116,13 @@ void recursiveTransform(waveletContainer *container, circular_array *input, int 
 	}
 	// Run the next step
 	int nextLength = currentBand - 1;
-	if(nextLength >= 1){
+	if(nextLength >= container->minimumData / 2){
 		recursiveTransform(container, scalingFactors, nextLength);
 	}else{
-		container->finalScale = ca_get(scalingFactors, 0);
+		size_t size = sizeof(double) * container->minimumData / 2;
+		double *finals = malloc(size);
+		memcpy(finals, scalingFactors->arr, size);
+		container->finalScales = finals;
 	}
 	destroyArray(scalingFactors);
 }

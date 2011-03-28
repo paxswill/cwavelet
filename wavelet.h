@@ -19,8 +19,9 @@ typedef struct{
 	scalingFunction scaling;
 	circular_array *input;
 	double **bands;
+	double *finalScales;
 	int stride;
-	double finalScale;
+	int minimumData;
 } waveletContainer;
 
 int logBase2(uint32_t num);
