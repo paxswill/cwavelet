@@ -47,7 +47,7 @@ void testFail(){
 
 bool testLog2(){
 	int position = 32;
-	for(int i = 0x100000000; i > 0; i >>= 1){
+	for(uint32_t i = 0x100000000; i > 0; i >>= 1){
 		if(logBase2(i) != position){
 			errorValue = logBase2(i);
 			errorMessage = "logBase2 Failed";
