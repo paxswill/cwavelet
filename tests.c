@@ -64,7 +64,7 @@ int testHaar(){
 	waveletContainer *c = createWavelet((double *)test1, 16, HAAR_WAVELET);
 	transform(c);
 	int correct = TRUE;
-	for(int i = 0; i < logBase2(c->length); ++i){
+	for(int i = 0; i < logBase2(c->input->length); ++i){
 		int currLength = pow(2, i);
 		for(int j = 0; j < currLength; ++j){
 			if(c->bands[i][j] != testBands1[i][j]){
@@ -80,7 +80,7 @@ int testHaar(){
 int testDaubechies(){
 	waveletContainer *c = createWavelet((double *)test1, 16, DAUBECHIES_4_WAVELET);
 	transform(c);
-	for(int i = 0; i < logBase2(c->length - c->padding); ++i){
+	for(int i = 0; i < logBase2(c->input->length); ++i){
 		int currLength = pow(2, i);
 		for(int j = 0; j < currLength; ++j){
 			printf("[%d][%d] = %f\n", i, j, c->bands[i][j]);
