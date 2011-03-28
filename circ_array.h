@@ -14,10 +14,10 @@ circular_array * createArray(int length);
 void destroyArray(circular_array *arr);
 
 // Access
-void set(int i, circular_array *arr, double d);
-double get(int i, circular_array *arr);
+void ca_set(int i, circular_array *arr, double d);
+double ca_get(int i, circular_array *arr);
 
 //Resizing
-void resize(circular_array *arr, int newSize);
+void ca_resize(circular_array *arr, int newSize);
 
 #endif /* end of include guard: CIRC_ARRAY_H_1DJIM3I8 */

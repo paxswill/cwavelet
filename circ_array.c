@@ -14,13 +14,13 @@ void destroyArray(circular_array *arr){
 }
 
 // Access
-void set(int i, circular_array *arr, double d){
+void ca_set(int i, circular_array *arr, double d){
 	assert(arr != NULL);
 	assert(i < arr->length);
 	arr->arr[i] = d;
 }
 
-double get(int i, circular_array *arr){
+double ca_get(int i, circular_array *arr){
 	assert(arr != NULL);
 	int newIndex;
 	if(i > 0){
@@ -33,7 +33,7 @@ double get(int i, circular_array *arr){
 
 
 //Resizing
-void resize(circular_array *arr, int newSize){
+void ca_resize(circular_array *arr, int newSize){
 	arr->arr = (double *)realloc(arr->arr, sizeof(double) * newSize);
 }
 
