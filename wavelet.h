@@ -19,14 +19,14 @@ typedef struct{
 	scalingFunction scaling;
 	circular_array *input;
 	double **bands;
-	int length;
 	int stride;
+	double finalScale;
 } waveletContainer;
 
 int logBase2(uint32_t num);
 waveletContainer * createWavelet(double *input, int length, int wavelet);
 void destroyWavelet(waveletContainer *wavelet);
 void transform(waveletContainer *wavelet);
-void recursiveTransform(waveletContainer *container, double *input, int currentBand);
+void recursiveTransform(waveletContainer *container, circular_array *input, int currentBand);
 
 #endif /* end of include guard: WAVELET_H_DWTGN12K */

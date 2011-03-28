@@ -65,7 +65,6 @@ waveletContainer * createWavelet(double *input, int length, int wavelet){
 		ca_set(arr, i, 0.0);
 	}
 	container->input = arr;
-	container->length = base2Length;
 	// Create the output bands
 	double **bands = (double **)malloc(l2 * sizeof(double *));
 	for(int i = 0; i < l2; ++i){
@@ -78,58 +77,40 @@ waveletContainer * createWavelet(double *input, int length, int wavelet){
 }
 
 void destroyWavelet(waveletContainer *wavelet){
-	// Free the input
-	free(wavelet->input);
 	// Free the bands
-	int numBands = logBase2(wavelet->length);
+	int numBands = logBase2(wavelet->input->length);
 	for(int i = 0; i < numBands; ++i){
 		free(wavelet->bands[i]);
 	}
 	free(wavelet->bands);
+	// Free the input
+	destroyArray(wavelet->input);
 	free(wavelet);
 }
 
 void transform(waveletContainer *wavelet){
-	recursiveTransform(wavelet, wavelet->input, logBase2(wavelet->length));
+	recursiveTransform(wavelet, wavelet->input, logBase2(wavelet->input->length));
 }
 
-void recursiveTransform(waveletContainer *container, double *input, int currentBand){
-	int currentLength = pow(2, currentBand);
-	int padding = container->padding;
-	double *scalingFactors = (double *)malloc(sizeof(double) * (currentLength / 2));
+void recursiveTransform(waveletContainer *container, circular_array *input, int currentBand){
+	circular_array *scalingFactors = createArray(input->length / 2);
 	// Go through the input array, jumping (stride) elements each step
-	for(int i = padding; i < (currentLength + padding); i += container->stride){
+	for(int i = 0; i < input->length; i += container->stride){
 		// Position in the scaling factors
 		int position = (i / container->stride);
 		// Create the wavelet coeffcients for this band
-		double value = container->wavelet(input + i);
+		double value = container->wavelet(input, i);
 		container->bands[currentBand - 1][position] = value;
 		// Create the scaling coeffcients for this band
-		scalingFactors[position] = container->scaling(input + i);
+		ca_set(scalingFactors, position, container->scaling(input, i));
 	}
 	// Run the next step
-	int nextLength = logBase2(pow(2, currentBand - 1));
-	double *temp = createPaddedInput(scalingFactors, currentLength / 2, padding);
-	free(scalingFactors);
-	scalingFactors = temp;
+	int nextLength = currentBand - 1;
 	if(nextLength >= 1){
 		recursiveTransform(container, scalingFactors, nextLength);
-		free(scalingFactors);
+	}else{
+		container->finalScale = ca_get(scalingFactors, 0);
 	}
-}
-
-double * createPaddedInput(double *unpadded, int length, int padding){
-	// Create the new array
-	double *padded = (double *)malloc(sizeof(double) * (length + padding + padding));
-	// Copy the old data in
-	memcpy(padded + padding, unpadded, length * sizeof(double));
-	// Fill in the padding
-	for(int i = 0; i < padding; ++i){
-		// Front
-		padded[i] = padded[length + i];
-		// Back
-		padded[length + padding + i] = padded[i + padding];
-	}
-	return padded;
+	destroyArray(scalingFactors);
 }
 
