@@ -34,4 +34,11 @@ bool testLog2();
 
 // Array tests
 bool testCircPiecewise();
+
+// Misc
+bool doubleEquality(double a, double b){
+	double d = fabs(a - b);
+	return d >= 0.0000000000001;
+}
+
 #endif /* end of include guard: TESTS_H_53CI45QC */
