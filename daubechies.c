@@ -42,7 +42,7 @@ static const double d10_coeff[10] = {
 
 double computeGeneralDaubechiesWavelet(const double *coeffs, int daubechiesNum, circular_array *arr, int i){
 	double sum = 0;
-	for(int j = 0; j < daubechiesNum - 1; ++j){
+	for(int j = 0; j < daubechiesNum; ++j){
 		// Wavelet coeffcients are related to the scaling coefficients by reversing
 		// the scaling coefficients and inverting every other coefficient
 		double wave_coeff = coeffs[daubechiesNum - 1 - j];
@@ -54,7 +54,7 @@ double computeGeneralDaubechiesWavelet(const double *coeffs, int daubechiesNum, 
 
 double computeGeneralDaubechiesScaling(const double *coeffs, int daubechiesNum, circular_array *arr, int i){
 	double sum = 0;
-	for(int j = 0; j < daubechiesNum - 1; ++j){
+	for(int j = 0; j < daubechiesNum; ++j){
 		sum += coeffs[j] * ca_get(arr, i + j);
 	}
 	return sum;
