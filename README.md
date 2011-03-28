@@ -1,6 +1,6 @@
 # cWavelets
 
-*cWavelets* is a small library to make computing the [discrete wavelet transforms](http://en.wikipedia.org/wiki/Discrete_wavelet_transform) (DWTs) easy.
+**cWavelets** is a small library to make computing the [discrete wavelet transforms](http://en.wikipedia.org/wiki/Discrete_wavelet_transform) (DWTs) easy.
 I apologize for the semi-OO style code written, but I wanted to leave it open 
 for some expansions I have in mind for later down the road (OpenCL, MPI).
 
