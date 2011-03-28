@@ -104,9 +104,7 @@ void recursiveTransform(waveletContainer *container, circular_array *input, int 
 		// Create the scaling coeffcients for this band
 		double scaleVal = container->scaling(input, i);
 		ca_set(scalingFactors, position, scaleVal);
-		printf("Wave: %f\tScale: %f\n", waveVal, scaleVal);
 	}
-	printf("\n");
 	// Run the next step
 	int nextLength = currentBand - 1;
 	if(nextLength >= 1){
