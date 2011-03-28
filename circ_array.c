@@ -40,6 +40,8 @@ double ca_get(circular_array *arr, int i){
 
 //Resizing
 void ca_resize(circular_array *arr, int newSize){
-	arr->arr = (double *)realloc(arr->arr, sizeof(double) * newSize);
+	if(newSize != arr->length){
+		arr->arr = (double *)realloc(arr->arr, sizeof(double) * newSize);
+	}
 }
 
