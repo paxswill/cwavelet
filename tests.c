@@ -83,7 +83,7 @@ bool testDaubechies(){
 		printf("\n");
 	}
 	destroyWavelet(c);
-	return TRUE;
+	return true;
 }
 
 
