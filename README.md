@@ -39,6 +39,8 @@ To access the data, access the `bands` array. This is probably going to change i
 When you are done with the wavelet container, destroy it with `destroyWavelet()`. 
 This frees all memory associated with the container.
 
+    destroyWavelet(container);
+
 ## Extending
 
 To add additional wavelets, there are a few steps you should take. First, 
