@@ -1,13 +1,13 @@
 # cWavelets
 
-**cWavelets** is a small library to make computing the [discrete wavelet transforms](http://en.wikipedia.org/wiki/Discrete_wavelet_transform) (DWTs) easy.
+**cWavelets** is a small library to make computing [discrete wavelet transforms](http://en.wikipedia.org/wiki/Discrete_wavelet_transform) (DWTs) easy.
 I apologize for the semi-OO style code written, but I wanted to leave it open 
 for some expansions I have in mind for later down the road (OpenCL, MPI).
 
 ## Compiling
 
-This is a fairly simple library, and it just makes use of the C Standard Library
-at this time. It does make use of C99 extensions, so be sure your compiler supports them.
+This is a fairly simple library, as it just makes use of the C Standard Library
+at this time. It does make use of C99 features, so be sure your compiler supports them.
 The included Makefile uses `clang` as it's default compiler, but you can switch it to 
 `gcc` if you wish.
 
@@ -34,7 +34,7 @@ To run the wavelet transform, call the `transform()` function on your wavelet co
 
     transform(container);
 
-To access the data, access the `bands` array. This is probably going to change in the future when I clean up the data access functions (read: create them).
+To access the data, access the `output` array. This is a circular array, as declared in `circ_array.h`. you can access using the `ca_get()` function, or you can access the data directly, such as `container->output->arr[0]`.
 
 When you are done with the wavelet container, destroy it with `destroyWavelet()`. 
 This frees all memory associated with the container.
