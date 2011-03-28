@@ -27,8 +27,7 @@ typedef struct{
 	waveletFunction wavelet;
 	scalingFunction scaling;
 	circular_array *input;
-	double **bands;
-	double *finalScales;
+	double *output;
 	int stride;
 	int minimumData;
 } waveletContainer;

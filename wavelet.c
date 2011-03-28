@@ -79,30 +79,18 @@ waveletContainer * createWavelet(double *input, int length, int wavelet){
 		ca_set(arr, i, 0.0);
 	}
 	container->input = arr;
-	// Create the output bands
-	double **bands = (double **)malloc(l2 * sizeof(double *));
-	for(int i = 0; i < l2; ++i){
-		int length = pow(2, i);
-		double *band = calloc(length, sizeof(double));
-		bands[i] = band;
-	}
-	// Create the output scales
-	double *finalScales = (double *)malloc(sizeof(double) * container->minimumData / 2);
-	container->finalScales = finalScales;
-	container->bands = bands;
+	// Copy the input to the working output
+	double *out = (double *)malloc(base2Length * sizeof(double));
+	memcpy(out, arr, base2Length * sizeof(double));
+	container->output = out;
 	return container;
 }
 
 void destroyWavelet(waveletContainer *wavelet){
-	// Free the bands
-	int numBands = logBase2(wavelet->input->length);
-	for(int i = 0; i < numBands; ++i){
-		free(wavelet->bands[i]);
-	}
-	free(wavelet->bands);
+	// Free the output
+	free(wavelet->out);
 	// Free the input
 	destroyArray(wavelet->input);
-	free(wavelet->finalScales);
 	free(wavelet);
 }
 
