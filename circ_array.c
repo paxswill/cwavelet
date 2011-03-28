@@ -29,7 +29,7 @@ void ca_set(circular_array *arr, int i, double d){
 double ca_get(circular_array *arr, int i){
 	assert(arr != NULL);
 	int newIndex = i;
-	if(i < 0 || i > arr->length){
+	if(i < 0 || i >= arr->length){
 		if(i > 0){
 			newIndex = i % arr->length;
 		}else{
