@@ -14,13 +14,13 @@ void destroyArray(circular_array *arr){
 }
 
 // Access
-void ca_set(int i, circular_array *arr, double d){
+void ca_set(circular_array *arr, int i, double d){
 	assert(arr != NULL);
 	assert(i < arr->length);
 	arr->arr[i] = d;
 }
 
-double ca_get(int i, circular_array *arr){
+double ca_get(circular_array *arr, int i){
 	assert(arr != NULL);
 	int newIndex;
 	if(i > 0){

@@ -14,8 +14,8 @@ circular_array * createArray(int length);
 void destroyArray(circular_array *arr);
 
 // Access
-void ca_set(int i, circular_array *arr, double d);
-double ca_get(int i, circular_array *arr);
+void ca_set(circular_array *arr, int i, double d);
+double ca_get(circular_array *arr, int i);
 
 //Resizing
 void ca_resize(circular_array *arr, int newSize);
