@@ -1,9 +1,4 @@
 #include "tests.h"
-#include <math.h>
-#include <stdio.h>
-
-#define TRUE 1
-#define FALSE 0
 
 const double test1[16] = 
 {
@@ -24,10 +19,10 @@ const double test2[16] =
 int main(int arcg, char **argv){
 	errorMessage = "";
 	errorValue = 1337;
-	int allPassed = TRUE;
-	allPassed = testLog2() ? allPassed : FALSE;
-	allPassed = testHaar() ? allPassed : FALSE;
-	allPassed = testDaubechies() ? allPassed : FALSE;
+	bool allPassed = true;
+	allPassed = testLog2() ? allPassed : false;
+	allPassed = testHaar() ? allPassed : false;
+	allPassed = testDaubechies() ? allPassed : false;
 	
 	if(allPassed){
 		printf("Tests Passed\n");
@@ -40,20 +35,20 @@ void testFail(){
 	printf("Test Failed: %s with value: %f\n", errorMessage, errorValue);
 }
 
-int testLog2(){
+bool testLog2(){
 	int position = 32;
 	for(int i = 0x100000000; i > 0; i >>= 1){
 		if(logBase2(i) != position){
 			errorValue = logBase2(i);
 			errorMessage = "logBase2 Failed";
-			return FALSE;
+			return false;
 		}
 		--position;
 	}
-	return TRUE;
+	return true;
 }
 
-int testHaar(){
+bool testHaar(){
 	// Expected responses
 	double band10[1] = {3.6875};
 	double band11[2] = {-4.625, -5.0};
@@ -63,12 +58,12 @@ int testHaar(){
 	// Testing
 	waveletContainer *c = createWavelet((double *)test1, 16, HAAR_WAVELET);
 	transform(c);
-	int correct = TRUE;
 	for(int i = 0; i < logBase2(c->length); ++i){
+	bool correct = true;
 		int currLength = pow(2, i);
 		for(int j = 0; j < currLength; ++j){
 			if(c->bands[i][j] != testBands1[i][j]){
-				correct = FALSE;
+				correct = false;
 				printf("Incorrect for Haar, test1: [%d][%d] = %f, not %f\n", i, j, c->bands[i][j], testBands1[i][j]);
 			}
 		}
@@ -77,7 +72,7 @@ int testHaar(){
 	return correct;
 }
 
-int testDaubechies(){
+bool testDaubechies(){
 	waveletContainer *c = createWavelet((double *)test1, 16, DAUBECHIES_4_WAVELET);
 	transform(c);
 	for(int i = 0; i < logBase2(c->length - c->padding); ++i){
@@ -88,7 +83,7 @@ int testDaubechies(){
 		printf("\n");
 	}
 	destroyWavelet(c);
-	return TRUE;
+	return true;
 }
 
 
