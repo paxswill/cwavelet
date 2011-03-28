@@ -94,23 +94,21 @@ void destroyWavelet(waveletContainer *wavelet){
 
 void transform(waveletContainer *container){
 	// Implemented using the lifting scheme
-	printf("Initial value:\n");
-	ca_print(container->output);
-	printf("\n");
 	for(int i = container->input->length; i >= container->minimumData; i >>= 1){
+		circular_array *constrainedArray = createArrayfromArrayNoCopy(i, container->output->arr);
+		size_t tempSize = sizeof(double) * i;
+		double *temp = (double *)malloc(tempSize);
 		int split = i >> 1;
-		circular_array *temp = createArrayfromArrayNoCopy(i, container->output->arr);
 		int k = 0;
 		for(int j = 0; j < i; j += container->stride){
-			double scaleVal = container->scaling(container->output, j);
-			double waveVal = container->wavelet(container->output, j);
-			ca_set(temp, j / 2, scaleVal);
-			ca_set(temp, j / 2 + split, waveVal);
+			double scaleVal = container->scaling(constrainedArray, j);
+			double waveVal = container->wavelet(constrainedArray, j);
+			temp[k] = scaleVal;
+			temp[k + split] = waveVal;
 			++k;
 		}
-		destroyNoCopyArray(temp);
-		printf("For interation %d:\n", i);
-		ca_print(container->output);
-		printf("\n");
+		destroyNoCopyArray(constrainedArray);
+		memcpy(container->output->arr, temp, tempSize);
+		free(temp);
 	}
 }
