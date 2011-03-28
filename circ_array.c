@@ -1,3 +1,12 @@
+/*
+ *	Copyright (c) 2011, William Ross
+ *	All rights reserved
+ *	This software is licensed under a modified BSD license. Please see COPYING for the full text.
+ *
+ *	circ_array.c
+ *
+ */
+
 #include "circ_array.h"
 
 // Creation/Destruction

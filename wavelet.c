@@ -1,3 +1,12 @@
+/*
+ *	Copyright (c) 2011, William Ross
+ *	All rights reserved
+ *	This software is licensed under a modified BSD license. Please see COPYING for the full text.
+ *
+ *	wavelet.c
+ *
+ */
+
 #include "wavelet.h"
 
 int logBase2(uint32_t num){

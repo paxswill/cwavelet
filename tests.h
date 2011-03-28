@@ -1,3 +1,12 @@
+/*
+ *	Copyright (c) 2011, William Ross
+ *	All rights reserved
+ *	This software is licensed under a modified BSD license. Please see COPYING for the full text.
+ *
+ *	tests.h
+ *
+ */
+
 #ifndef TESTS_H_53CI45QC
 #define TESTS_H_53CI45QC
 

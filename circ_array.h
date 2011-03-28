@@ -1,3 +1,12 @@
+/*
+ *	Copyright (c) 2011, William Ross
+ *	All rights reserved
+ *	This software is licensed under a modified BSD license. Please see COPYING for the full text.
+ *
+ *	circ_array.h
+ *
+ */
+
 #ifndef CIRC_ARRAY_H_1DJIM3I8
 #define CIRC_ARRAY_H_1DJIM3I8
 

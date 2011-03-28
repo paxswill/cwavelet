@@ -1,3 +1,12 @@
+/*
+ *	Copyright (c) 2011, William Ross
+ *	All rights reserved
+ *	This software is licensed under a modified BSD license. Please see COPYING for the full text.
+ *
+ *	daubechies.h
+ *
+ */
+
 #ifndef DAUBECHIES_H_4IFSHX8
 #define DAUBECHIES_H_4IFSHX8
 
