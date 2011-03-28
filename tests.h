@@ -1,6 +1,9 @@
 #ifndef TESTS_H_53CI45QC
 #define TESTS_H_53CI45QC
 
+#include <math.h>
+#include <stdio.h>
+#include <stdbool.h>
 #include "haar.h"
 #include "wavelet.h"
 
@@ -11,13 +14,12 @@ int main(int arcg, char **argv);
 void testFail();
 
 // Haar
-int testHaar();
+bool testHaar();
 
 // Daubechies
-int testDaubechies();
+bool testDaubechies();
 
 // Wavelet tests
-int testLog2();
-void testWave();
+bool testLog2();
 
 #endif /* end of include guard: TESTS_H_53CI45QC */
