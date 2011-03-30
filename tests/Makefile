@@ -1,16 +1,18 @@
 # Makefile for Unit tests
 
-tests.o: tests.c test.h
-	$(CC) $(CFLAGS) -c $< -o $@
+all: tests.o testing
 
-testing: tests.o haar.o wavelet.o daubechies.o circ_array.o
-	$(CC) $(CFLAGS) $^ -o $@
-
-test: testing
-	./testing
-
-debug-test: testing
-	gdb testing
+.PHONY: clean all
 
 clean:
 	rm *.o
+	rm testing
+
+tests.o: tests.c tests.h
+	$(CC) $(CFLAGS) -I$(ROOTDIR)/src -c $< -o $@
+
+VPATH = $(ROOTDIR)/src
+testing: tests.o haar.o wavelet.o daubechies.o circ_array.o
+	$(CC) $(CFLAGS) $^ -o $@
+
+

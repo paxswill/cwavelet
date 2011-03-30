@@ -1,29 +1,30 @@
-CC=clang
-CFLAGS=-ggdb -O0 -Wall -std=c99
+# Top-level Makefile
 
+include Makefile.inc
 
-wavelet.o: wavelet.c
-	$(CC) $(CFLAGS) -c wavelet.c -o wavelet.o
+SUBDIRS=src tests
+CLEANDIRS=$(SUBDIRS)
 
-haar.o: haar.c haar.h
-	$(CC) $(CFLAGS) -c haar.c -o haar.o
+# Default recipe
+all: subdirs
 
-daubechies.o: daubechies.c daubechies.h
-	$(CC) $(CFLAGS) -c daubechies.c -o daubechies.o
+# Make Semantic Assurances
+.PHONY: all clean subdirs $(SUBDIRS) $(CLEANDIRS)
+tests: src
 
-circ_array.o: circ_array.c circ_array.h
-	$(CC) $(CFLAGS) -c circ_array.c -o circ_array.o
+# Various phony tagets
+subdirs: $(SUBDIRS)
+$(SUBDIRS):
+	$(MAKE) -C $@
 
-testing.o: tests.c tests.h haar.o wavelet.o daubechies.o circ_array.o
-	$(CC) $(CFLAGS) tests.c haar.o wavelet.o daubechies.o circ_array.o -o testing.o
+clean: $(CLEANDIRS)
+$(CLEANDIRS):
+	$(MAKE) -C $@ clean
 
-test: testing.o
-	./testing.o
+VPATH=$(ROOTDIR)/tests
+test: testing
+	$<
 
-debug-test: testing.o
-	gdb testing.o
-
-all: wavelet.o haar.o testing.o daubechies.o circ_array.o
-
-clean:
-	rm *.o
+debug-test: testing
+	gdb $<
+	
