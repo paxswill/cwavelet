@@ -45,19 +45,6 @@ void testFail(){
 	printf("Test Failed: %s with value: %f\n", errorMessage, errorValue);
 }
 
-bool testLog2(){
-	int position = 32;
-	for(uint32_t i = 0x100000000; i > 0; i >>= 1){
-		if(logBase2(i) != position){
-			errorValue = logBase2(i);
-			errorMessage = "logBase2 Failed";
-			return false;
-		}
-		--position;
-	}
-	return true;
-}
-
 bool testHaar(){
 	// Expected response
 	double testResults1[16] =
