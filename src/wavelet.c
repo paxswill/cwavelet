@@ -112,3 +112,11 @@ void transform(waveletContainer *container){
 		free(temp);
 	}
 }
+
+void liftSplit(waveletContainer *container){
+
+}
+
+void liftMerge(waveletContainer *container){
+	
+}

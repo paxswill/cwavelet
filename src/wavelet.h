@@ -38,4 +38,8 @@ void destroyWavelet(waveletContainer *wavelet);
 void transform(waveletContainer *wavelet);
 void recursiveTransform(waveletContainer *container, circular_array *input, int currentBand);
 
+// Lifting functions
+void liftSplit(waveletContainer *container);
+void liftMerge(waveletContainer *container);
+
 #endif /* end of include guard: WAVELET_H_DWTGN12K */
