@@ -12,3 +12,5 @@ set(CMAKE_C_COMPILER clang)
 add_subdirectory(src)
 add_subdirectory(tests)
 
+# Testing
+enable_testing()
