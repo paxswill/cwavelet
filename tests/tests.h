@@ -34,6 +34,7 @@ bool testLog2();
 
 // Array tests
 bool testCircPiecewise();
+bool testSplit();
 
 // Misc
 bool doubleEquality(double a, double b){

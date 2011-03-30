@@ -114,7 +114,19 @@ void transform(waveletContainer *container){
 }
 
 void liftSplit(waveletContainer *container){
-
+	// Move odd values to the end
+	double *array = container->output->arr;
+	int length = container->output->length;
+	int half = length / 2;
+	for(int i = 0; i < half; ++i){
+		int even = i * 2;
+		int odd = even + 1;
+		if(odd < length){
+			double t = array[odd];
+			array[odd] = array[even + half];
+			array[even + half] = t;
+		}
+	}
 }
 
 void liftMerge(waveletContainer *container){

@@ -33,6 +33,7 @@ int main(int arcg, char **argv){
 	allPassed = testHaar() ? allPassed : false;
 	allPassed = testDaubechies() ? allPassed : false;
 	allPassed = testCircPiecewise() ? allPassed : false;
+	allPassed = testSplit() ? allPassed : false;
 	
 	if(allPassed){
 		printf("Tests Passed\n");
@@ -123,4 +124,31 @@ bool testCircPiecewise(){
 		}
 	}
 	return isCorrect;
+}
+
+bool testSplit(){
+	double arr[8] = {0, 1, 2, 3, 4, 5, 6, 7};
+	circular_array *c = createArrayFromArray(8, arr);
+
+
+	double *array = c->arr;
+	int length = c->length;
+	int half = length / 2;
+	for(int i = 0; i < half; ++i){
+		int even = i;
+		int odd = even + 1;
+		if(odd < length){
+			double t = array[odd];
+			printf("temp: %f\n", t);
+			array[odd] = array[even + half];
+			array[even + half] = t;
+		}
+	}
+
+	printf("array = { %f", array[0]);
+	for(int i = 1; i < 8; ++i){
+		printf(", %f", array[0]);
+	}
+	printf("}\n");
+	return true;
 }
