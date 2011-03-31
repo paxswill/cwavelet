@@ -35,80 +35,37 @@ int logBase2(uint32_t num){
 	return DeBruijn[(uint32_t)(num * 0x07C4ACDDU) >> 27];
 }
 
-
-waveletContainer * createWavelet(double *input, int length, int wavelet){
-	waveletContainer *container = (waveletContainer *)malloc(sizeof(waveletContainer));
-	// Identify the wavelet
-	if(wavelet == HAAR_WAVELET || wavelet == DAUBECHIES_2_WAVELET){
-		// Haar Wavelet
-		container->wavelet = haar_wavelet;
-		container->scaling = haar_scaling;
-		container->stride = 2;
-		container->minimumData = 2;
-	}else if(wavelet == DAUBECHIES_4_WAVELET){
-		container->wavelet = daubechies_4_wavelet;
-		container->scaling = daubechies_4_scaling;
-		container->stride = 2;
-		container->minimumData = 4;
-	}else if(wavelet == DAUBECHIES_6_WAVELET){
-		container->wavelet = daubechies_6_wavelet;
-		container->scaling = daubechies_6_scaling;
-		container->stride = 2;
-		container->minimumData = 6;
-	}else if(wavelet == DAUBECHIES_8_WAVELET){
-		container->wavelet = daubechies_8_wavelet;
-		container->scaling = daubechies_8_scaling;
-		container->stride = 2;
-		container->minimumData = 8;
-	}else if(wavelet == DAUBECHIES_10_WAVELET){
-		container->wavelet = daubechies_10_wavelet;
-		container->scaling = daubechies_10_scaling;
-		container->stride = 2;
-		container->minimumData = 10;
-	}
+double * transform(wavelet w, double *input, int length){
 	// Pad to a value of 2^n
 	int l2 = logBase2(length);
 	int base2Length = pow(2, l2);
 	if(l2 > base2Length){
 		base2Length<<=1;
 	}
-	circular_array *arr = createArrayFromArray(length, input);
-	ca_resize(arr, base2Length);
+	circular_array *inputArray = createArrayFromArray(length, input);
+	ca_resize(inputArray, base2Length);
 	// Fill in the rest with zeros
 	for(int i = length; i < base2Length; ++i){
-		ca_set(arr, i, 0.0);
+		ca_set(inputArray, i, 0.0);
 	}
-	container->input = arr;
-	// Copy the output as well
-	container->output = copyArray(container->input);
-	return container;
-}
-
-void destroyWavelet(waveletContainer *wavelet){
-	// Free the output
-	destroyArray(wavelet->output);
-	// Free the input
-	destroyArray(wavelet->input);
-	free(wavelet);
-}
-
-void transform(waveletContainer *container){
-	// Implemented using the lifting scheme
-	for(int i = container->input->length; i >= container->minimumData; i >>= 1){
-		circular_array *constrainedArray = createArrayfromArrayNoCopy(i, container->output->arr);
+	// Actually run the transform
+	for(int i = length; i >= w.minimumData; i >>= 1){
+		circular_array *constrainedArray = createArrayfromArrayNoCopy(i, inputArray->arr);
 		size_t tempSize = sizeof(double) * i;
 		double *temp = (double *)malloc(tempSize);
 		int split = i >> 1;
 		int k = 0;
-		for(int j = 0; j < i; j += container->stride){
-			double scaleVal = container->scaling(constrainedArray, j);
-			double waveVal = container->wavelet(constrainedArray, j);
+		for(int j = 0; j < i; j += w.stride){
+			double scaleVal = w.scaling(constrainedArray, j);
+			double waveVal = w.wavelet(constrainedArray, j);
 			temp[k] = scaleVal;
 			temp[k + split] = waveVal;
 			++k;
 		}
 		destroyNoCopyArray(constrainedArray);
-		memcpy(container->output->arr, temp, tempSize);
+		memcpy(inputArray->arr, temp, tempSize);
 		free(temp);
 	}
+	destroyNoCopyArray(inputArray);
+	return inputArray->arr;
 }
