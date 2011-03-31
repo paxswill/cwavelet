@@ -69,3 +69,24 @@ double * transform(wavelet w, double *input, int length){
 	destroyNoCopyArray(inputArray);
 	return inputArray->arr;
 }
+
+double * liftSplit(double *vals, int length){
+	// Move odd values to the end
+	double *ret = malloc(sizeof(double) * length);
+	memcpy(ret, vals, sizeof(double) * length);
+	int half = length / 2;
+	// Split even and odd
+	for(int i = 0; i < (half / 2); ++i){
+		int even = i * 2;
+		int odd = even + 1;
+		double t = ret[odd];
+		ret[odd] = ret[half + even];
+		ret[half + even] = t;
+	}
+	return ret;
+}
+
+double * liftMerge(double *vals, int length){
+	
+}
+
