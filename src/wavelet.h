@@ -26,11 +26,9 @@ typedef double (*scalingFunction)(circular_array *arr, int i);
 typedef struct{
 	waveletFunction wavelet;
 	scalingFunction scaling;
-	circular_array *input;
-	circular_array *output;
 	int stride;
 	int minimumData;
-} waveletContainer;
+} wavelet;
 
 int logBase2(uint32_t num);
 waveletContainer * createWavelet(double *input, int length, int wavelet);

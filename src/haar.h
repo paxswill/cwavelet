@@ -12,9 +12,16 @@
 
 #include "wavelet.h"
 #include "circ_array.h"
-#define HAAR_WAVELET 7142
 
 double haar_wavelet(circular_array *arr, int i);
 double haar_scaling(circular_array *arr, int i);
+
+static const wavelet HAAR_WAVELET = 
+{
+	haar_wavelet,
+	haar_scaling,
+	2,
+	2
+};
 
 #endif /* end of include guard: HAAR_H_VZI4HXRC */
