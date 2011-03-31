@@ -8,6 +8,8 @@
  */
 
 #include "daubechies.h"
+#include "haar.h"
+#include "circ_array.h"
 
 static const double d2_coeff[2] = {
  7.071067811865475244008443621048490392848359376884740365883398e-01,

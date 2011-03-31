@@ -11,8 +11,7 @@
 #define DAUBECHIES_H_4IFSHX8
 
 #include <stdlib.h>
-#include "circ_array.h"
-#include "haar.h"
+#include "wavelet.h"
 
 double computeGeneralDaubechiesScaling(const double *coeffs, int daubechiesNum, circular_array *arr, int i);
 double computeGeneralDaubechiesWavelet(const double *coeffs, int daubechiesNum, circular_array *arr, int i);
