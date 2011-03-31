@@ -11,14 +11,7 @@
 #define DAUBECHIES_H_4IFSHX8
 
 #include <stdlib.h>
-#include "circ_array.h"
-#include "haar.h"
-
-#define DAUBECHIES_2_WAVELET 32036
-#define DAUBECHIES_4_WAVELET 31573
-#define DAUBECHIES_6_WAVELET 32423
-#define DAUBECHIES_8_WAVELET 23163
-#define DAUBECHIES_10_WAVELET 26856
+#include "wavelet.h"
 
 double computeGeneralDaubechiesScaling(const double *coeffs, int daubechiesNum, circular_array *arr, int i);
 double computeGeneralDaubechiesWavelet(const double *coeffs, int daubechiesNum, circular_array *arr, int i);
@@ -37,5 +30,11 @@ double daubechies_8_scaling(circular_array *arr, int i);
 
 double daubechies_10_wavelet(circular_array *arr, int i);
 double daubechies_10_scaling(circular_array *arr, int i);
+
+static const wavelet DAUBECHIES_2_WAVELET = {daubechies_2_wavelet, daubechies_2_scaling, 2, 2};
+static const wavelet DAUBECHIES_4_WAVELET = {daubechies_4_wavelet, daubechies_4_scaling, 2, 4};
+static const wavelet DAUBECHIES_6_WAVELET = {daubechies_6_wavelet, daubechies_6_scaling, 2, 6};
+static const wavelet DAUBECHIES_8_WAVELET = {daubechies_8_wavelet, daubechies_8_scaling, 2, 8};
+static const wavelet DAUBECHIES_10_WAVELET = {daubechies_10_wavelet, daubechies_10_scaling, 2, 10};
 
 #endif /* end of include guard: DAUBECHIES_H_4IFSHX8 */

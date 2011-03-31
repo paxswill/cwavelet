@@ -16,8 +16,6 @@
 #include <string.h>
 #include <math.h>
 #include "circ_array.h"
-#include "haar.h"
-#include "daubechies.h"
 
 // Wavelet and scaling funtions
 typedef double (*waveletFunction)(circular_array *arr, int i);
@@ -26,17 +24,12 @@ typedef double (*scalingFunction)(circular_array *arr, int i);
 typedef struct{
 	waveletFunction wavelet;
 	scalingFunction scaling;
-	circular_array *input;
-	circular_array *output;
 	int stride;
 	int minimumData;
-} waveletContainer;
+} wavelet;
 
 int logBase2(uint32_t num);
-waveletContainer * createWavelet(double *input, int length, int wavelet);
-void destroyWavelet(waveletContainer *wavelet);
-void transform(waveletContainer *wavelet);
-void recursiveTransform(waveletContainer *container, circular_array *input, int currentBand);
+double * transform(wavelet w, double *input, int length);
 
 // Lifting functions
 void liftSplit(waveletContainer *container);

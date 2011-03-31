@@ -6,8 +6,11 @@ project(cWavelet)
 set(CMAKE_C_FLAGS "-std=c99 -Wall -Wextra -pendantic")
 set(CMAKE_C_FLAGS_DEBUG "-O0 -ggdb")
 set(CMAKE_C_FLAGS_RELEASE "-Os")
+set(CMAKE_C_COMPILER clang)
 
 # Set paths
 add_subdirectory(src)
 add_subdirectory(tests)
 
+# Testing
+enable_testing()

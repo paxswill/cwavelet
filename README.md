@@ -4,12 +4,16 @@
 I apologize for the semi-OO style code written, but I wanted to leave it open 
 for some expansions I have in mind for later down the road (OpenCL, MPI).
 
+## Prerequisites
+
+This library uses only the C Standard library, so you don't need to track down a bunch of esoteric libraries.
+I do use [CMake](http://www.cmake.org/) to generate the Makefiles (or Visual Studio projects for WIndows (which is untested)) and run unit tests, so you will need to install that.
+
 ## Compiling
 
-This is a fairly simple library, as it just makes use of the C Standard Library
-at this time. It does make use of C99 features, so be sure your compiler supports them.
-The included Makefile uses `clang` as it's default compiler, but you can switch it to 
-`gcc` if you wish.
+Run the `autogen.sh` script to create the build environment. Once it's done, change 
+into the `build` directory and run `make` to build the library. If you would like to run
+the unit tests, run `make test`.
 
 ## Usage
 
@@ -28,7 +32,7 @@ Currently the Haar and Daubechies 2 through 10 wavelets are implemented. The con
     HAAR_WAVELET
     DAUBECHIES_N_WAVELET
 
-where N is the number for the Daubechies wavelet. See `tests.c` for further examples of instantiation.
+where N is the number for the Daubechies wavelet. See the files in `tests` for further examples of instantiation.
 
 To run the wavelet transform, call the `transform()` function on your wavelet container.
 
