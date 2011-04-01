@@ -95,7 +95,7 @@ void liftSplit(double *vals, int length){
 		vals[half + even] = t;
 	}
 	// Now recurse on each half
-	if(half >= 2){
+	if(half >= 4){
 		liftSplit(vals, half);
 		liftSplit(vals + half, half);
 	}
@@ -104,7 +104,7 @@ void liftSplit(double *vals, int length){
 void liftMerge(double *vals, int length){
 	int half = length / 2;
 	// Fix the sub-halves first
-	if(half >= 2){
+	if(half >= 4){
 		liftMerge(vals, half);
 		liftMerge(vals + half, half);
 	}
