@@ -50,13 +50,15 @@ double * transform(wavelet w, double *input, int length){
 	}
 	// Run the appripriate transform
 	if(w.isLifting){
-		liftTransform(input, length);
+		liftTransform(w, inputArray->arr, inputArray->length);
 	}else{
-		double *temp = standardTransform(w, inputArray);
+		standardTransform(w, inputArray);
 	}
+	//destroyNoCopyArray(inputArray);
+	return inputArray->arr;
 }
 
-double *standardTransform(wavelet w, circular_array *inputArray){
+void standardTransform(wavelet w, circular_array *inputArray){
 	// Actually run the transform
 	for(int i = inputArray->length; i >= w.minimumData; i >>= 1){
 		circular_array *constrainedArray = createArrayfromArrayNoCopy(i, inputArray->arr);
@@ -75,13 +77,20 @@ double *standardTransform(wavelet w, circular_array *inputArray){
 		memcpy(inputArray->arr, temp, tempSize);
 		free(temp);
 	}
-	destroyNoCopyArray(inputArray);
-	return inputArray->arr;
 }
 
 
 
-void liftTransform(double *vals, int length){
+void liftTransform(wavelet w, double *vals, int length){
+	liftSplit(vals, length);
+	int half = length >> 1; // length / 2
+	for(int i = 0; i < half; ++i){
+		vals[half + i] = w.detail.predict(vals[i], vals[half + i]);
+		vals[i] = w.coarse.update(vals[i], vals[half + i]);
+	}
+	if(half > w.minimumData){
+		liftTransform(w, vals, half);
+	}
 }
 
 void liftSplit(double *vals, int length){

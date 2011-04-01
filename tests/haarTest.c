@@ -10,7 +10,7 @@ int main(){
 	};
 	// Testing
 	int length = 16;
-	double *results = transform(HAAR_WAVELET, test1, length);
+	double *results = transform(HAAR_LIFTING_WAVELET, test1, length);
 	int correct = 0;
 	for(int i = 0; i < length; ++i){
 		if(doubleEquality(results[i], testResults1[i])){

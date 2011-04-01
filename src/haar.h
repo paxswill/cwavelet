@@ -20,6 +20,6 @@ double haar_predict(double even, double odd);
 double haar_update(double even, double odd);
 
 static const wavelet HAAR_WAVELET = {{.wavelet = haar_wavelet}, {.scaling = haar_scaling}, false, 2, 2};
-static const wavelet HAAR_LIFTING_WAVELET = {{.predict = haar_predict}, {.update = haar_update}, true, 2, 2};
+static const wavelet HAAR_LIFTING_WAVELET = {{.update = haar_update}, {.predict = haar_predict}, true, 2, 2};
 
 #endif /* end of include guard: HAAR_H_VZI4HXRC */

@@ -28,12 +28,12 @@ typedef double (*liftingPredict)(double even, double odd);
 typedef struct{
 	union coarseFunction{
 		waveletFunction wavelet;
-		liftingPredict predict;
+		liftingPredict update;
 	}coarse;
 	
 	union detailFunction{
 		scalingFunction scaling;
-		liftingUpdate update;
+		liftingUpdate predict;
 	}detail;
 	bool isLifting;
 	int stride;
@@ -44,10 +44,10 @@ int logBase2(uint32_t num);
 double * transform(wavelet w, double *input, int length);
 
 // Standard transforms
-double *standardTransform(wavelet w, circular_array *inputArray);
+void standardTransform(wavelet w, circular_array *inputArray);
 
 // Lifting functions
-void liftTransform(double *vals, int length);
+void liftTransform(wavelet w, double *vals, int length);
 void liftSplit(double *vals, int length);
 void liftMerge(double *vals, int length);
 
