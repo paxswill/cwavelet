@@ -3,287 +3,176 @@
 <plist version="1.0">
 <dict>
 	<key>currentDocument</key>
-	<string>Makefile</string>
+	<string>tests/splitTest.c</string>
 	<key>documents</key>
 	<array>
-		<dict>
-			<key>filename</key>
-			<string>Makefile</string>
-			<key>lastUsed</key>
-			<date>2011-03-29T02:08:30Z</date>
-			<key>selected</key>
-			<true/>
-		</dict>
-		<dict>
-			<key>filename</key>
-			<string>wavelet.h</string>
-			<key>lastUsed</key>
-			<date>2011-03-29T01:58:52Z</date>
-		</dict>
-		<dict>
-			<key>filename</key>
-			<string>wavelet.c</string>
-			<key>lastUsed</key>
-			<date>2011-03-29T01:58:52Z</date>
-		</dict>
-		<dict>
-			<key>children</key>
-			<array>
-				<dict>
-					<key>filename</key>
-					<string>haar.h</string>
-					<key>lastUsed</key>
-					<date>2011-03-29T01:58:52Z</date>
-				</dict>
-				<dict>
-					<key>filename</key>
-					<string>haar.c</string>
-					<key>lastUsed</key>
-					<date>2011-03-29T01:37:10Z</date>
-				</dict>
-				<dict>
-					<key>filename</key>
-					<string>daubechies.h</string>
-					<key>lastUsed</key>
-					<date>2011-03-29T01:37:10Z</date>
-				</dict>
-				<dict>
-					<key>filename</key>
-					<string>daubechies.c</string>
-					<key>lastUsed</key>
-					<date>2011-03-29T01:38:12Z</date>
-				</dict>
-			</array>
-			<key>expanded</key>
-			<true/>
-			<key>name</key>
-			<string>Wavelets</string>
-		</dict>
-		<dict>
-			<key>children</key>
-			<array>
-				<dict>
-					<key>filename</key>
-					<string>circ_array.h</string>
-					<key>lastUsed</key>
-					<date>2011-03-29T02:01:45Z</date>
-				</dict>
-				<dict>
-					<key>filename</key>
-					<string>circ_array.c</string>
-					<key>lastUsed</key>
-					<date>2011-03-29T02:02:56Z</date>
-				</dict>
-				<dict>
-					<key>filename</key>
-					<string>tests.h</string>
-					<key>lastUsed</key>
-					<date>2011-03-29T02:08:30Z</date>
-				</dict>
-				<dict>
-					<key>filename</key>
-					<string>tests.c</string>
-					<key>lastUsed</key>
-					<date>2011-03-29T02:08:29Z</date>
-				</dict>
-			</array>
-			<key>expanded</key>
-			<true/>
-			<key>name</key>
-			<string>Utility</string>
-		</dict>
-		<dict>
-			<key>filename</key>
-			<string>COPYING</string>
-			<key>lastUsed</key>
-			<date>2011-03-28T09:16:10Z</date>
-		</dict>
 		<dict>
 			<key>filename</key>
 			<string>README.md</string>
 			<key>lastUsed</key>
 			<date>2011-03-28T19:16:19Z</date>
 		</dict>
+		<dict>
+			<key>filename</key>
+			<string>COPYING</string>
+			<key>lastUsed</key>
+			<date>2011-04-01T04:20:52Z</date>
+		</dict>
+		<dict>
+			<key>filename</key>
+			<string>CMakeLists.txt</string>
+		</dict>
+		<dict>
+			<key>children</key>
+			<array>
+				<dict>
+					<key>filename</key>
+					<string>src/CMakeLists.txt</string>
+					<key>lastUsed</key>
+					<date>2011-04-01T04:21:10Z</date>
+				</dict>
+				<dict>
+					<key>filename</key>
+					<string>src/wavelet.h</string>
+					<key>lastUsed</key>
+					<date>2011-04-01T04:21:12Z</date>
+				</dict>
+				<dict>
+					<key>filename</key>
+					<string>src/wavelet.c</string>
+					<key>lastUsed</key>
+					<date>2011-04-01T04:21:15Z</date>
+				</dict>
+				<dict>
+					<key>filename</key>
+					<string>src/daubechies.h</string>
+				</dict>
+				<dict>
+					<key>filename</key>
+					<string>src/daubechies.c</string>
+				</dict>
+				<dict>
+					<key>filename</key>
+					<string>src/haar.h</string>
+				</dict>
+				<dict>
+					<key>filename</key>
+					<string>src/haar.c</string>
+				</dict>
+				<dict>
+					<key>filename</key>
+					<string>src/circ_array.h</string>
+				</dict>
+				<dict>
+					<key>filename</key>
+					<string>src/circ_array.c</string>
+					<key>lastUsed</key>
+					<date>2011-04-01T04:20:51Z</date>
+				</dict>
+			</array>
+			<key>expanded</key>
+			<true/>
+			<key>name</key>
+			<string>Source</string>
+		</dict>
+		<dict>
+			<key>children</key>
+			<array>
+				<dict>
+					<key>filename</key>
+					<string>tests/CMakeLists.txt</string>
+				</dict>
+				<dict>
+					<key>filename</key>
+					<string>tests/testingCommon.h</string>
+				</dict>
+				<dict>
+					<key>filename</key>
+					<string>tests/circ_arrayTest.c</string>
+				</dict>
+				<dict>
+					<key>filename</key>
+					<string>tests/daubechiesTest.c</string>
+				</dict>
+				<dict>
+					<key>filename</key>
+					<string>tests/haarTest.c</string>
+				</dict>
+				<dict>
+					<key>filename</key>
+					<string>tests/logBase2.c</string>
+				</dict>
+				<dict>
+					<key>filename</key>
+					<string>tests/splitTest.c</string>
+					<key>lastUsed</key>
+					<date>2011-04-01T04:21:15Z</date>
+					<key>selected</key>
+					<true/>
+				</dict>
+			</array>
+			<key>expanded</key>
+			<true/>
+			<key>name</key>
+			<string>Tests</string>
+		</dict>
 	</array>
 	<key>fileHierarchyDrawerWidth</key>
 	<integer>200</integer>
 	<key>metaData</key>
 	<dict>
-		<key>Makefile</key>
+		<key>src/wavelet.c</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>14</integer>
+				<integer>8</integer>
 				<key>line</key>
-				<integer>23</integer>
+				<integer>83</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>40</integer>
+		</dict>
+		<key>src/wavelet.h</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>4</integer>
+				<key>line</key>
+				<integer>34</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
 			<integer>0</integer>
 		</dict>
-		<key>circ_array.c</key>
+		<key>tests/splitTest.c</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>0</integer>
+				<integer>21</integer>
 				<key>line</key>
-				<integer>0</integer>
+				<integer>6</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
 			<integer>0</integer>
-		</dict>
-		<key>daubechies.c</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>15</integer>
-				<key>line</key>
-				<integer>5</integer>
-			</dict>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>17</integer>
-		</dict>
-		<key>daubechies.h</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>0</integer>
-				<key>line</key>
-				<integer>0</integer>
-			</dict>
-			<key>columnSelection</key>
-			<false/>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>0</integer>
-			<key>selectFrom</key>
-			<dict>
-				<key>column</key>
-				<integer>3</integer>
-				<key>line</key>
-				<integer>7</integer>
-			</dict>
-			<key>selectTo</key>
-			<dict>
-				<key>column</key>
-				<integer>0</integer>
-				<key>line</key>
-				<integer>0</integer>
-			</dict>
-		</dict>
-		<key>haar.c</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>9</integer>
-				<key>line</key>
-				<integer>5</integer>
-			</dict>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>0</integer>
-		</dict>
-		<key>haar.h</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>9</integer>
-				<key>line</key>
-				<integer>5</integer>
-			</dict>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>0</integer>
-		</dict>
-		<key>wavelet.c</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>2</integer>
-				<key>line</key>
-				<integer>128</integer>
-			</dict>
-			<key>columnSelection</key>
-			<false/>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>81</integer>
-			<key>selectFrom</key>
-			<dict>
-				<key>column</key>
-				<integer>1</integer>
-				<key>line</key>
-				<integer>117</integer>
-			</dict>
-			<key>selectTo</key>
-			<dict>
-				<key>column</key>
-				<integer>2</integer>
-				<key>line</key>
-				<integer>128</integer>
-			</dict>
-		</dict>
-		<key>wavelet.h</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>0</integer>
-				<key>line</key>
-				<integer>41</integer>
-			</dict>
-			<key>columnSelection</key>
-			<false/>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>0</integer>
-			<key>selectFrom</key>
-			<dict>
-				<key>column</key>
-				<integer>44</integer>
-				<key>line</key>
-				<integer>42</integer>
-			</dict>
-			<key>selectTo</key>
-			<dict>
-				<key>column</key>
-				<integer>0</integer>
-				<key>line</key>
-				<integer>41</integer>
-			</dict>
 		</dict>
 	</dict>
 	<key>openDocuments</key>
 	<array>
-		<string>wavelet.h</string>
-		<string>wavelet.c</string>
-		<string>haar.h</string>
-		<string>haar.c</string>
-		<string>daubechies.h</string>
-		<string>daubechies.c</string>
-		<string>Makefile</string>
-		<string>circ_array.c</string>
+		<string>src/wavelet.h</string>
+		<string>src/wavelet.c</string>
+		<string>tests/splitTest.c</string>
 	</array>
 	<key>showFileHierarchyDrawer</key>
 	<true/>
 	<key>windowFrame</key>
-	<string>{{251, 57}, {865, 821}}</string>
+	<string>{{343, 57}, {865, 821}}</string>
 </dict>
 </plist>
