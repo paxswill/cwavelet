@@ -84,8 +84,7 @@ double *standardTransform(wavelet w, circular_array *inputArray){
 void liftTransform(double *vals, int length){
 }
 
-
-void liftShuffle(double *vals, int length){
+void liftSplit(double *vals, int length){
 	int half = length / 2;
 	// shuffle
 	for(int i = 0; i < (half / 2); ++i){
@@ -95,11 +94,6 @@ void liftShuffle(double *vals, int length){
 		vals[odd] = vals[half + even];
 		vals[half + even] = t;
 	}
-}
-
-void liftSplit(double *vals, int length){
-	int half = length / 2;
-	liftShuffle(vals, length);
 	// Now recurse on each half
 	if(half >= 2){
 		liftSplit(vals, half);
@@ -114,6 +108,13 @@ void liftMerge(double *vals, int length){
 		liftMerge(vals, half);
 		liftMerge(vals + half, half);
 	}
-	liftShuffle(vals, length);
+	// shuffle
+	for(int i = 0; i < (half / 2); ++i){
+		int even = i * 2;
+		int odd = even + 1;
+		double t = vals[odd];
+		vals[odd] = vals[half + even];
+		vals[half + even] = t;
+	}
 }
 
