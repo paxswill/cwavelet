@@ -43,7 +43,11 @@ typedef struct{
 int logBase2(uint32_t num);
 double * transform(wavelet w, double *input, int length);
 
+// Standard transforms
+double *standardTransform(wavelet w, circular_array *inputArray);
+
 // Lifting functions
+void liftTransform(double *vals, int length);
 void liftSplit(double *vals, int length);
 void liftMerge(double *vals, int length);
 

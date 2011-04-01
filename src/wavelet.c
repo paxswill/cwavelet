@@ -48,16 +48,25 @@ double * transform(wavelet w, double *input, int length){
 	for(int i = length; i < base2Length; ++i){
 		ca_set(inputArray, i, 0.0);
 	}
+	// Run the appripriate transform
+	if(w.isLifting){
+		liftTransform(input, length);
+	}else{
+		double *temp = standardTransform(w, inputArray);
+	}
+}
+
+double *standardTransform(wavelet w, circular_array *inputArray){
 	// Actually run the transform
-	for(int i = length; i >= w.minimumData; i >>= 1){
+	for(int i = inputArray->length; i >= w.minimumData; i >>= 1){
 		circular_array *constrainedArray = createArrayfromArrayNoCopy(i, inputArray->arr);
 		size_t tempSize = sizeof(double) * i;
 		double *temp = (double *)malloc(tempSize);
 		int split = i >> 1;
 		int k = 0;
 		for(int j = 0; j < i; j += w.stride){
-			double scaleVal = w.scaling(constrainedArray, j);
-			double waveVal = w.wavelet(constrainedArray, j);
+			double scaleVal = w.detail.scaling(constrainedArray, j);
+			double waveVal = w.coarse.wavelet(constrainedArray, j);
 			temp[k] = scaleVal;
 			temp[k + split] = waveVal;
 			++k;
@@ -69,6 +78,12 @@ double * transform(wavelet w, double *input, int length){
 	destroyNoCopyArray(inputArray);
 	return inputArray->arr;
 }
+
+
+
+void liftTransform(double *vals, int length){
+}
+
 
 void liftShuffle(double *vals, int length){
 	int half = length / 2;
