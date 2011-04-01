@@ -11,12 +11,7 @@ int main(){
 	}
 
 	liftSplit(arr, length);
-	/*
-	printf("array = { %2.2f", arr[0]);
-	for(int i = 1; i < length; ++i){
-		printf(", %2.2f", arr[i]);
-	}
-	printf("}\n\n");
-	*/
+	
+	liftMerge(arr, length);
 	return 0;
 }
