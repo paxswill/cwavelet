@@ -70,9 +70,9 @@ double * transform(wavelet w, double *input, int length){
 	return inputArray->arr;
 }
 
-void liftSplit(double *vals, int length){
+void liftShuffle(double *vals, int length){
 	int half = length / 2;
-	// Split even and odd
+	// shuffle
 	for(int i = 0; i < (half / 2); ++i){
 		int even = i * 2;
 		int odd = even + 1;
@@ -80,6 +80,11 @@ void liftSplit(double *vals, int length){
 		vals[odd] = vals[half + even];
 		vals[half + even] = t;
 	}
+}
+
+void liftSplit(double *vals, int length){
+	int half = length / 2;
+	liftShuffle(vals, length);
 	// Now recurse on each half
 	if(half >= 2){
 		liftSplit(vals, half);
@@ -87,7 +92,13 @@ void liftSplit(double *vals, int length){
 	}
 }
 
-double * liftMerge(double *vals, int length){
-	
+void liftMerge(double *vals, int length){
+	int half = length / 2;
+	// Fix the sub-halves first
+	if(half >= 2){
+		liftMerge(vals, half);
+		liftMerge(vals + half, half);
+	}
+	liftShuffle(vals, length);
 }
 

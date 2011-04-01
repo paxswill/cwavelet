@@ -33,6 +33,6 @@ double * transform(wavelet w, double *input, int length);
 
 // Lifting functions
 void liftSplit(double *vals, int length);
-double * liftMerge(double *vals, int length);
+void liftMerge(double *vals, int length);
 
 #endif /* end of include guard: WAVELET_H_DWTGN12K */
