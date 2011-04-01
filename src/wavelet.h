@@ -15,15 +15,27 @@
 #include <stdint.h>
 #include <string.h>
 #include <math.h>
+#include <stdbool.h>
 #include "circ_array.h"
 
 // Wavelet and scaling funtions
 typedef double (*waveletFunction)(circular_array *arr, int i);
 typedef double (*scalingFunction)(circular_array *arr, int i);
 
+typedef double (*liftingUpdate)(double even, double odd);
+typedef double (*liftingPredict)(double even, double odd);
+
 typedef struct{
-	waveletFunction wavelet;
-	scalingFunction scaling;
+	union coarseFunction{
+		waveletFunction wavelet;
+		liftingPredict predict;
+	}coarse;
+	
+	union detailFunction{
+		scalingFunction scaling;
+		liftingUpdate update;
+	}detail;
+	bool isLifting;
 	int stride;
 	int minimumData;
 } wavelet;
