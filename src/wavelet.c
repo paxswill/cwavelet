@@ -93,12 +93,6 @@ void liftTransform(wavelet w, double *vals, int length){
 	for(int i = 0; i < half; ++i){
 		vals[i] = w.coarse.update(vals[i], vals[i + half]);
 	}
-	// debugging
-	printf("Status of arr:\n{ ");
-	for(int j = 0; j < length; ++j){
-		printf("\t%2.2f\n", vals[j]);
-	}
-	printf("}\n");
 	if(half >= w.minimumData){
 		liftTransform(w, vals, half);
 	}
