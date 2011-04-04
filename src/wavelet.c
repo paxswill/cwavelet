@@ -84,11 +84,22 @@ void standardTransform(wavelet w, circular_array *inputArray){
 void liftTransform(wavelet w, double *vals, int length){
 	liftSplit(vals, length);
 	int half = length >> 1; // length / 2
+	// Predict
 	for(int i = 0; i < half; ++i){
-		vals[half + i] = w.detail.predict(vals[i], vals[half + i]);
-		vals[i] = w.coarse.update(vals[i], vals[half + i]);
+		//predict(a, b) == b - a
+		vals[i + half] = w.detail.predict(vals[i], vals[i + half]);
 	}
-	if(half > w.minimumData){
+	// Update
+	for(int i = 0; i < half; ++i){
+		vals[i] = w.coarse.update(vals[i], vals[i + half]);
+	}
+	// debugging
+	printf("Status of arr:\n{ ");
+	for(int j = 0; j < length; ++j){
+		printf("\t%2.2f\n", vals[j]);
+	}
+	printf("}\n");
+	if(half >= w.minimumData){
 		liftTransform(w, vals, half);
 	}
 }
