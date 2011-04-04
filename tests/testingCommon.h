@@ -17,6 +17,14 @@ const double test2[16] =
 	32318.0, 29534.0, 4480.0, 10782.0 
 };
 
+const double test3[16] = 
+{
+	0, 1, 2, 3,
+ 	4, 5, 6, 7,
+	8, 9, 10, 11,
+	12, 13, 14, 15
+};
+
 bool doubleEquality(double a, double b){
 	double d = fabs(a - b);
 	return d >= 0.0000000000001;
