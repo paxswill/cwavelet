@@ -104,7 +104,17 @@ void liftTransform(wavelet w, double *vals, int length){
 	}
 }
 
+/*
+ *	A Note to those trying to optimize the following functions:
+ *	The shuffle loop can quite easily be facotred out into a seperate function,
+ *	but it adds a noticable speed penalty. It is quite possibly I had
+ *	the compilations flags and/or the inline keyword semantics wrong,
+ *	but I could not remove the speed penalty for breaking the shuffle
+ *	loop into a seperate function
+ */
+
 void liftSplit(double *vals, int length){
+	// See note above
 	int half = length / 2;
 	// shuffle
 	for(int i = 0; i < (half / 2); ++i){
@@ -122,6 +132,7 @@ void liftSplit(double *vals, int length){
 }
 
 void liftMerge(double *vals, int length){
+	// See note above
 	int half = length / 2;
 	// Fix the sub-halves first
 	if(half >= 4){
