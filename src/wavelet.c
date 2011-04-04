@@ -104,19 +104,8 @@ void liftTransform(wavelet w, double *vals, int length){
 	}
 }
 
-/*
- *	A Note to those trying to optimize the following functions:
- *	The shuffle loop can quite easily be facotred out into a seperate function,
- *	but it adds a noticable speed penalty. It is quite possibly I had
- *	the compilations flags and/or the inline keyword semantics wrong,
- *	but I could not remove the speed penalty for breaking the shuffle
- *	loop into a seperate function
- */
-
-void liftSplit(double *vals, int length){
-	// See note above
+inline void liftShuffle(double *vals, int length){
 	int half = length / 2;
-	// shuffle
 	for(int i = 0; i < (half / 2); ++i){
 		int even = i * 2;
 		int odd = even + 1;
@@ -124,6 +113,12 @@ void liftSplit(double *vals, int length){
 		vals[odd] = vals[half + even];
 		vals[half + even] = t;
 	}
+}
+
+void liftSplit(double *vals, int length){
+	int half = length / 2;
+	// shuffle
+	liftShuffle(vals, length);
 	// Now recurse on each half
 	if(half >= 4){
 		liftSplit(vals, half);
@@ -132,7 +127,6 @@ void liftSplit(double *vals, int length){
 }
 
 void liftMerge(double *vals, int length){
-	// See note above
 	int half = length / 2;
 	// Fix the sub-halves first
 	if(half >= 4){
@@ -140,12 +134,5 @@ void liftMerge(double *vals, int length){
 		liftMerge(vals + half, half);
 	}
 	// shuffle
-	for(int i = 0; i < (half / 2); ++i){
-		int even = i * 2;
-		int odd = even + 1;
-		double t = vals[odd];
-		vals[odd] = vals[half + even];
-		vals[half + even] = t;
-	}
+	liftShuffle(vals, length);
 }
-
