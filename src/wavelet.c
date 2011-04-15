@@ -92,12 +92,18 @@ void liftTransform(wavelet w, circular_array *inputArray){
 	// Predict
 	for(int i = 0; i < half; ++i){
 		//predict(a, b) == b - a
-		vals[i + half] = w.wavelet.lifting.predict(even, odd, i);
+		ca_set(odd, i, w.wavelet.lifting.predict(even, odd, i));
 	}
 	// Update
 	for(int i = 0; i < half; ++i){
-		vals[i] = w.wavelet.lifting.update(even, odd, i);
+		ca_set(even, i, w.wavelet.lifting.update(even, odd, i));
 	}
+	//Debugging stuff
+	printf("\n");
+	for(int i = 0; i < 8; ++i){
+		printf("\t[%d] = %2.5f\n", i, vals[i]);
+	}
+	printf("\n");
 	if(half >= w.minimumData){
 		liftTransform(w, even);
 	}
