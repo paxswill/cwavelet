@@ -26,8 +26,8 @@ typedef double (*scalingFunction)(circular_array *arr, int i);
 typedef double (*liftingForward)(double *vals, int length);
 typedef double (*liftingInverse)(double *vals, int length);
 
-typedef double (*liftingUpdate)(circular_array *even, circular_array *odd, int n);
-typedef double (*liftingPredict)(circular_array *even, circular_array *odd, int n);
+typedef double (*liftingUpdate)(circular_array *even, circular_array *odd, int n, int dir);
+typedef double (*liftingPredict)(circular_array *even, circular_array *odd, int n, int dir);
 
 typedef struct{
 	liftingUpdate update;
