@@ -10,17 +10,17 @@
 #include "haar.h"
 
 double haar_wavelet(circular_array *arr, int i){
-	return (ca_get(arr, i) - ca_get(arr, i + 1)) / 2;
+	return (ca_get(arr, i) - ca_get(arr, i + 1)) / 1;
 }
 
 double haar_scaling(circular_array *arr, int i){
 	return (ca_get(arr, i) + ca_get(arr, i + 1)) / 2;
 }
 
-double haar_predict(double even, double odd){
-	return odd - even;
+double haar_predict(circular_array *even, circular_array *odd, int n){
+	return ca_get(odd, n) - ca_get(even, n);
 }
 
-double haar_update(double even, double odd){
-	return even + (odd / 2);
+double haar_update(circular_array *even, circular_array *odd, int n){
+	return ca_get(even, n) + (ca_get(odd, n) / 2);
 }

@@ -16,10 +16,10 @@
 double haar_wavelet(circular_array *arr, int i);
 double haar_scaling(circular_array *arr, int i);
 
-double haar_predict(double even, double odd);
-double haar_update(double even, double odd);
+double haar_predict(circular_array *even, circular_array *odd, int n);
+double haar_update(circular_array *even, circular_array *odd, int n);
 
-static const wavelet HAAR_WAVELET = {{.wavelet = haar_wavelet}, {.scaling = haar_scaling}, false, 2, 2};
-static const wavelet HAAR_LIFTING_WAVELET = {{.update = haar_update}, {.predict = haar_predict}, true, 2, 2};
+static const wavelet HAAR_WAVELET = {{.classic = {haar_wavelet, haar_scaling}}, false, 2, 2};
+static const wavelet HAAR_LIFTING_WAVELET = {{.lifting = {haar_update, haar_predict}}, true, 2, 2};
 
 #endif /* end of include guard: HAAR_H_VZI4HXRC */

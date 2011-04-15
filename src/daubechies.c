@@ -81,6 +81,7 @@ double daubechies_2_scaling(circular_array *arr, int i){
 	return haar_scaling(arr, i);
 }
 
+// D4
 double daubechies_4_wavelet(circular_array *arr, int i){
 	return computeGeneralDaubechiesWavelet(d4_coeff, 4, arr, i);
 }
@@ -89,6 +90,7 @@ double daubechies_4_scaling(circular_array *arr, int i){
 	return computeGeneralDaubechiesScaling(d4_coeff, 4, arr, i);
 }
 
+// D6
 double daubechies_6_wavelet(circular_array *arr, int i){
 	return computeGeneralDaubechiesWavelet(d6_coeff, 6, arr, i);
 }
@@ -97,6 +99,7 @@ double daubechies_6_scaling(circular_array *arr, int i){
 	return computeGeneralDaubechiesScaling(d6_coeff, 6, arr, i);
 }
 
+// D8
 double daubechies_8_wavelet(circular_array *arr, int i){
 	return computeGeneralDaubechiesWavelet(d8_coeff, 8, arr, i);
 }
@@ -105,6 +108,7 @@ double daubechies_8_scaling(circular_array *arr, int i){
 	return computeGeneralDaubechiesScaling(d8_coeff, 8, arr, i);
 }
 
+// D10
 double daubechies_10_wavelet(circular_array *arr, int i){
 	return computeGeneralDaubechiesWavelet(d10_coeff, 10, arr, i);
 }

@@ -50,7 +50,7 @@ double * transform(wavelet w, double *input, int length){
 	}
 	// Run the appripriate transform
 	if(w.isLifting){
-		liftTransform(w, inputArray->arr, inputArray->length);
+		liftTransform(w, inputArray);
 	}else{
 		standardTransform(w, inputArray);
 	}
@@ -59,6 +59,7 @@ double * transform(wavelet w, double *input, int length){
 }
 
 void standardTransform(wavelet w, circular_array *inputArray){
+	classicFunctions funcs = w.wavelet.classic;
 	// Actually run the transform
 	for(int i = inputArray->length; i >= w.minimumData; i >>= 1){
 		circular_array *constrainedArray = createArrayfromArrayNoCopy(i, inputArray->arr);
@@ -67,8 +68,8 @@ void standardTransform(wavelet w, circular_array *inputArray){
 		int split = i >> 1;
 		int k = 0;
 		for(int j = 0; j < i; j += w.stride){
-			double scaleVal = w.detail.scaling(constrainedArray, j);
-			double waveVal = w.coarse.wavelet(constrainedArray, j);
+			double scaleVal = funcs.scaling(constrainedArray, j);
+			double waveVal = funcs.wavelet(constrainedArray, j);
 			temp[k] = scaleVal;
 			temp[k + split] = waveVal;
 			++k;
@@ -81,24 +82,28 @@ void standardTransform(wavelet w, circular_array *inputArray){
 
 
 
-void liftTransform(wavelet w, double *vals, int length){
+void liftTransform(wavelet w, circular_array *inputArray){
+	int length = inputArray->length;
+	double *vals = inputArray->arr;
 	liftSplit(vals, length);
 	int half = length >> 1; // length / 2
+	circular_array *odd = createArrayfromArrayNoCopy(half, vals + half);
+	circular_array *even = createArrayfromArrayNoCopy(half, vals);
 	// Predict
 	for(int i = 0; i < half; ++i){
 		//predict(a, b) == b - a
-		vals[i + half] = w.detail.predict(vals[i], vals[i + half]);
+		vals[i + half] = w.wavelet.lifting.predict(even, odd, i);
 	}
 	// Update
 	for(int i = 0; i < half; ++i){
-		vals[i] = w.coarse.update(vals[i], vals[i + half]);
+		vals[i] = w.wavelet.lifting.update(even, odd, i);
 	}
 	if(half >= w.minimumData){
-		liftTransform(w, vals, half);
+		liftTransform(w, even);
 	}
 }
 
-inline void liftShuffle(double *vals, int length){
+static inline void liftShuffle(double *vals, int length){
 	int half = length / 2;
 	for(int i = 0; i < (half / 2); ++i){
 		int even = i * 2;

@@ -16,25 +16,37 @@
 #include <string.h>
 #include <math.h>
 #include <stdbool.h>
+#include <stdarg.h>
 #include "circ_array.h"
 
 // Wavelet and scaling funtions
 typedef double (*waveletFunction)(circular_array *arr, int i);
 typedef double (*scalingFunction)(circular_array *arr, int i);
 
-typedef double (*liftingUpdate)(double even, double odd);
-typedef double (*liftingPredict)(double even, double odd);
+typedef double (*liftingForward)(double *vals, int length);
+typedef double (*liftingInverse)(double *vals, int length);
+
+typedef double (*liftingUpdate)(circular_array *even, circular_array *odd, int n);
+typedef double (*liftingPredict)(circular_array *even, circular_array *odd, int n);
 
 typedef struct{
-	union coarseFunction{
-		waveletFunction wavelet;
-		liftingPredict update;
-	}coarse;
+	liftingUpdate update;
+	liftingPredict predict;
+} liftingFunctions;
+
+typedef struct{
+	waveletFunction wavelet;
+	scalingFunction scaling;
+} classicFunctions;
+
+
+typedef struct{
+	// Wavelet functions
+	union{
+		classicFunctions classic;
+		liftingFunctions lifting;
+	}wavelet;
 	
-	union detailFunction{
-		scalingFunction scaling;
-		liftingUpdate predict;
-	}detail;
 	bool isLifting;
 	int stride;
 	int minimumData;
@@ -47,7 +59,7 @@ double * transform(wavelet w, double *input, int length);
 void standardTransform(wavelet w, circular_array *inputArray);
 
 // Lifting functions
-void liftTransform(wavelet w, double *vals, int length);
+void liftTransform(wavelet w, circular_array *inputArray);
 void liftSplit(double *vals, int length);
 void liftMerge(double *vals, int length);
 
