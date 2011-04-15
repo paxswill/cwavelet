@@ -17,14 +17,24 @@ int main(){
 	// Testing
 	int length = 8;
 	double test[8] = {50, 20, 90, 40, 5, 60, 35, 80};
+	double testResult[8] = {47.5, 2.5, -15.0, -12.5, 15.0, 25.0, -27.5, -22.5};
 	double *results = transform(HAAR_LIFTING_WAVELET, test, length);
 	int correct = 0;
 	
 	for(int i = 0; i < length; ++i){
-		if(doubleEquality(results[i], testResults3[i])){
+		if(doubleEquality(results[i], 0)){
 			correct = 1;
-			printf("Incorrect for Haar, test1: [%d] = %f, not %f\n", i, results[i], testResults1[i]);
+			printf("Incorrect for Haar, test1: [%d] = %f, not %f\n", i, results[i], testResult[i]);
 		}
 	}
+	/*
+	double * invResults = inverseTransform(HAAR_LIFTING_WAVELET, results, length);
+	for(int i = 0; i < length; ++i){
+		if(doubleEquality(invResults[i], 0)){
+			correct = 1;
+			printf("Incorrect for Haar, test1: [%d] = %f, not %f\n", i, invResults[i], test[i]);
+		}
+	}
+	*/
 	return correct;
 }

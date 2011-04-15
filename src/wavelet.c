@@ -63,6 +63,15 @@ double * transform(wavelet w, double *input, int length){
 	return inputArray->arr;
 }
 
+double * inverseTransform(wavelet w, double *input, int length){
+	// Assume it's already padded
+	circular_array *inputArray = createArrayFromArray(length, input);
+	if(w.isLifting){
+		liftInverse(w, inputArray);
+	}
+	return inputArray->arr;
+}
+
 void standardTransform(wavelet w, circular_array *inputArray){
 	classicFunctions funcs = w.wavelet.classic;
 	// Actually run the transform

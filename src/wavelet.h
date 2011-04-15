@@ -54,6 +54,7 @@ typedef struct{
 
 int logBase2(uint32_t num);
 double * transform(wavelet w, double *input, int length);
+double * inverseTransform(wavelet w, double *input, int length);
 
 // Standard transforms
 void standardTransform(wavelet w, circular_array *inputArray);
