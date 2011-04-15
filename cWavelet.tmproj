@@ -37,7 +37,7 @@
 					<key>filename</key>
 					<string>src/wavelet.h</string>
 					<key>lastUsed</key>
-					<date>2011-04-02T19:16:11Z</date>
+					<date>2011-04-05T07:27:28Z</date>
 					<key>selected</key>
 					<true/>
 				</dict>
@@ -45,7 +45,7 @@
 					<key>filename</key>
 					<string>src/wavelet.c</string>
 					<key>lastUsed</key>
-					<date>2011-04-02T19:16:08Z</date>
+					<date>2011-04-05T07:26:41Z</date>
 				</dict>
 				<dict>
 					<key>filename</key>
@@ -61,13 +61,13 @@
 					<key>filename</key>
 					<string>src/haar.h</string>
 					<key>lastUsed</key>
-					<date>2011-04-01T17:54:51Z</date>
+					<date>2011-04-05T07:27:28Z</date>
 				</dict>
 				<dict>
 					<key>filename</key>
 					<string>src/haar.c</string>
 					<key>lastUsed</key>
-					<date>2011-04-01T17:59:36Z</date>
+					<date>2011-04-05T02:47:20Z</date>
 				</dict>
 				<dict>
 					<key>filename</key>
@@ -124,7 +124,7 @@
 					<key>filename</key>
 					<string>tests/splitTest.c</string>
 					<key>lastUsed</key>
-					<date>2011-04-02T04:47:44Z</date>
+					<date>2011-04-05T02:46:58Z</date>
 				</dict>
 			</array>
 			<key>expanded</key>
@@ -165,19 +165,47 @@
 			<key>firstVisibleLine</key>
 			<integer>0</integer>
 		</dict>
+		<key>src/haar.h</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>22</integer>
+				<key>line</key>
+				<integer>22</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>0</integer>
+		</dict>
+		<key>src/wavelet.c</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>2</integer>
+				<key>line</key>
+				<integer>108</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>76</integer>
+		</dict>
 		<key>src/wavelet.h</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>0</integer>
+				<integer>21</integer>
 				<key>line</key>
-				<integer>41</integer>
+				<integer>28</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>1</integer>
+			<integer>0</integer>
 		</dict>
 		<key>tests/CMakeLists.txt</key>
 		<dict>
@@ -212,7 +240,7 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>3</integer>
+				<integer>1</integer>
 				<key>line</key>
 				<integer>13</integer>
 			</dict>
@@ -239,8 +267,10 @@
 	<key>openDocuments</key>
 	<array>
 		<string>src/wavelet.h</string>
-		<string>tests/splitTest.c</string>
+		<string>src/wavelet.c</string>
+		<string>src/haar.h</string>
 		<string>src/haar.c</string>
+		<string>tests/splitTest.c</string>
 		<string>tests/haarTest.c</string>
 		<string>tests/testingCommon.h</string>
 		<string>CMakeLists.txt</string>
@@ -249,6 +279,6 @@
 	<key>showFileHierarchyDrawer</key>
 	<true/>
 	<key>windowFrame</key>
-	<string>{{361, 57}, {865, 821}}</string>
+	<string>{{439, 57}, {865, 821}}</string>
 </dict>
 </plist>
