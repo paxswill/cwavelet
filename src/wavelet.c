@@ -119,27 +119,20 @@ void liftInverse(wavelet w, circular_array *inputArray){
 	int length = inputArray->length;
 	int half = length >> 1; // length / 2
 	circular_array *odd = createArrayfromArrayNoCopy(half, (inputArray->arr) + half);
-	liftUpdate(w, inputArray, INVERSE_TR);
-	liftPredict(w, inputArray, INVERSE_TR);
-	liftMerge(inputArray->arr, inputArray->length);
-	
-	//Debugging stuff
-	printf("\n");
-	for(int i = 0; i < 8; ++i){
-		printf("\t[%d] = %2.5f\n", i, inputArray->arr[i]);
-	}
-	printf("\n");
 	
 	if(half >= w.minimumData){
 		liftInverse(w, odd);
 	}
 	destroyNoCopyArray(odd);
+	
+	liftUpdate(w, inputArray, INVERSE_TR);
+	liftPredict(w, inputArray, INVERSE_TR);
+	liftMerge(inputArray->arr, inputArray->length);
 }
 
 void liftPredict(wavelet w, circular_array *inputArray, int dir){
 	int length = inputArray->length;
 	double *vals = inputArray->arr;
-	liftSplit(vals, length);
 	int half = length >> 1; // length / 2
 	circular_array *odd = createArrayfromArrayNoCopy(half, vals + half);
 	circular_array *even = createArrayfromArrayNoCopy(half, vals);
@@ -155,7 +148,6 @@ void liftPredict(wavelet w, circular_array *inputArray, int dir){
 void liftUpdate(wavelet w, circular_array *inputArray, int dir){
 	int length = inputArray->length;
 	double *vals = inputArray->arr;
-	liftSplit(vals, length);
 	int half = length >> 1; // length / 2
 	circular_array *odd = createArrayfromArrayNoCopy(half, vals + half);
 	circular_array *even = createArrayfromArrayNoCopy(half, vals);
