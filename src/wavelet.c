@@ -85,15 +85,13 @@ void standardTransform(wavelet w, circular_array *inputArray){
 	}
 }
 
-
-
 void liftTransform(wavelet w, circular_array *inputArray){
 	int length = inputArray->length;
 	int half = length >> 1; // length / 2
 	circular_array *even = createArrayfromArrayNoCopy(half, inputArray->arr);
 	liftSplit(inputArray->arr, inputArray->length);
-	liftPredict(w, inputArray, INVERSE_TR);
-	liftUpdate(w, inputArray, INVERSE_TR);
+	liftPredict(w, inputArray, FORWARD_TR);
+	liftUpdate(w, inputArray, FORWARD_TR);
 	
 	//Debugging stuff
 	printf("\n");
