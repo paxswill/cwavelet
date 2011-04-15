@@ -60,6 +60,9 @@ void standardTransform(wavelet w, circular_array *inputArray);
 
 // Lifting functions
 void liftTransform(wavelet w, circular_array *inputArray);
+void liftInverse(wavelet w, circular_array *inputArray);
+void liftPredict(wavelet w, circular_array *inputArray, int dir);
+void liftUpdate(wavelet w, circular_array *inputArray, int dir);
 void liftSplit(double *vals, int length);
 void liftMerge(double *vals, int length);
 

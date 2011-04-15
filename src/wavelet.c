@@ -9,6 +9,11 @@
 
 #include "wavelet.h"
 
+typedef enum{
+	FORWARD_TR = 0,
+	INVERSE_TR = 1
+} transformDirection;
+
 int logBase2(uint32_t num){
 	/*
 	 *	Uses the method described here:
@@ -84,6 +89,48 @@ void standardTransform(wavelet w, circular_array *inputArray){
 
 void liftTransform(wavelet w, circular_array *inputArray){
 	int length = inputArray->length;
+	int half = length >> 1; // length / 2
+	circular_array *even = createArrayfromArrayNoCopy(half, inputArray->arr);
+	liftSplit(inputArray->arr, inputArray->length);
+	liftPredict(w, inputArray, INVERSE_TR);
+	liftUpdate(w, inputArray, INVERSE_TR);
+	
+	//Debugging stuff
+	printf("\n");
+	for(int i = 0; i < 8; ++i){
+		printf("\t[%d] = %2.5f\n", i, inputArray->arr[i]);
+	}
+	printf("\n");
+	
+	if(half >= w.minimumData){
+		liftTransform(w, even);
+	}
+	destroyNoCopyArray(even);
+}
+
+void liftInverse(wavelet w, circular_array *inputArray){
+	int length = inputArray->length;
+	int half = length >> 1; // length / 2
+	circular_array *odd = createArrayfromArrayNoCopy(half, (inputArray->arr) + half);
+	liftUpdate(w, inputArray, INVERSE_TR);
+	liftPredict(w, inputArray, INVERSE_TR);
+	liftMerge(inputArray->arr, inputArray->length);
+	
+	//Debugging stuff
+	printf("\n");
+	for(int i = 0; i < 8; ++i){
+		printf("\t[%d] = %2.5f\n", i, inputArray->arr[i]);
+	}
+	printf("\n");
+	
+	if(half >= w.minimumData){
+		liftInverse(w, odd);
+	}
+	destroyNoCopyArray(odd);
+}
+
+void liftPredict(wavelet w, circular_array *inputArray, int dir){
+	int length = inputArray->length;
 	double *vals = inputArray->arr;
 	liftSplit(vals, length);
 	int half = length >> 1; // length / 2
@@ -92,21 +139,25 @@ void liftTransform(wavelet w, circular_array *inputArray){
 	// Predict
 	for(int i = 0; i < half; ++i){
 		//predict(a, b) == b - a
-		ca_set(odd, i, w.wavelet.lifting.predict(even, odd, i));
+		ca_set(odd, i, w.wavelet.lifting.predict(even, odd, i, dir));
 	}
+	destroyNoCopyArray(odd);
+	destroyNoCopyArray(even);
+}
+
+void liftUpdate(wavelet w, circular_array *inputArray, int dir){
+	int length = inputArray->length;
+	double *vals = inputArray->arr;
+	liftSplit(vals, length);
+	int half = length >> 1; // length / 2
+	circular_array *odd = createArrayfromArrayNoCopy(half, vals + half);
+	circular_array *even = createArrayfromArrayNoCopy(half, vals);
 	// Update
 	for(int i = 0; i < half; ++i){
-		ca_set(even, i, w.wavelet.lifting.update(even, odd, i));
+		ca_set(even, i, w.wavelet.lifting.update(even, odd, i, dir));
 	}
-	//Debugging stuff
-	printf("\n");
-	for(int i = 0; i < 8; ++i){
-		printf("\t[%d] = %2.5f\n", i, vals[i]);
-	}
-	printf("\n");
-	if(half >= w.minimumData){
-		liftTransform(w, even);
-	}
+	destroyNoCopyArray(odd);
+	destroyNoCopyArray(even);
 }
 
 static inline void liftShuffle(double *vals, int length){
