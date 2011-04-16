@@ -7,7 +7,6 @@
  *
  */
 
-#include "pthreads_wavelet.h"
 #include <pthread.h>
 
 typedef struct{
@@ -17,6 +16,11 @@ typedef struct{
 
 int threadCount = 0;
 static pthread_mutex_t countMutex = PTHREAD_MUTEX_INITIALIZER;
+
+void * liftSplit_pthread_Task(void *arg);
+void * liftMerge_pthread_Task(void *arg);
+void liftSplit_pthread(double *vals, int length);
+void liftMerge_pthread(double *vals, int length);
 
 void * liftSplit_pthread_Task(void *arg){
 	splitArg *realArg = arg;
