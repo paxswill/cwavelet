@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>currentDocument</key>
-	<string>src/CMakeLists.txt</string>
+	<string>tests/CMakeLists.txt</string>
 	<key>documents</key>
 	<array>
 		<dict>
@@ -22,7 +22,19 @@
 			<key>filename</key>
 			<string>CMakeLists.txt</string>
 			<key>lastUsed</key>
-			<date>2011-04-15T04:52:16Z</date>
+			<date>2011-04-16T08:15:43Z</date>
+		</dict>
+		<dict>
+			<key>filename</key>
+			<string>cwavelet-config.h</string>
+			<key>lastUsed</key>
+			<date>2011-04-16T08:15:41Z</date>
+		</dict>
+		<dict>
+			<key>filename</key>
+			<string>cwavelet-config.h.in</string>
+			<key>lastUsed</key>
+			<date>2011-04-16T08:15:40Z</date>
 		</dict>
 		<dict>
 			<key>children</key>
@@ -31,19 +43,19 @@
 					<key>filename</key>
 					<string>src/CMakeLists.txt</string>
 					<key>lastUsed</key>
-					<date>2011-04-16T05:49:49Z</date>
+					<date>2011-04-16T08:17:40Z</date>
 				</dict>
 				<dict>
 					<key>filename</key>
 					<string>src/wavelet.h</string>
 					<key>lastUsed</key>
-					<date>2011-04-15T08:39:35Z</date>
+					<date>2011-04-16T08:15:38Z</date>
 				</dict>
 				<dict>
 					<key>filename</key>
 					<string>src/wavelet.c</string>
 					<key>lastUsed</key>
-					<date>2011-04-15T08:41:54Z</date>
+					<date>2011-04-16T08:13:05Z</date>
 				</dict>
 				<dict>
 					<key>children</key>
@@ -52,15 +64,19 @@
 							<key>filename</key>
 							<string>src/single_wavelet.c</string>
 							<key>lastUsed</key>
-							<date>2011-04-15T08:16:17Z</date>
+							<date>2011-04-16T07:57:03Z</date>
+						</dict>
+						<dict>
+							<key>filename</key>
+							<string>src/openmp_wavelet.c</string>
+							<key>lastUsed</key>
+							<date>2011-04-16T07:57:04Z</date>
 						</dict>
 						<dict>
 							<key>filename</key>
 							<string>src/pthreads_wavelet.c</string>
 							<key>lastUsed</key>
-							<date>2011-04-16T05:49:42Z</date>
-							<key>selected</key>
-							<true/>
+							<date>2011-04-16T07:57:01Z</date>
 						</dict>
 					</array>
 					<key>expanded</key>
@@ -78,7 +94,7 @@
 					<key>filename</key>
 					<string>src/daubechies.c</string>
 					<key>lastUsed</key>
-					<date>2011-04-15T08:41:52Z</date>
+					<date>2011-04-16T08:09:00Z</date>
 				</dict>
 				<dict>
 					<key>filename</key>
@@ -117,7 +133,9 @@
 					<key>filename</key>
 					<string>tests/CMakeLists.txt</string>
 					<key>lastUsed</key>
-					<date>2011-04-15T08:26:15Z</date>
+					<date>2011-04-16T08:17:40Z</date>
+					<key>selected</key>
+					<true/>
 				</dict>
 				<dict>
 					<key>filename</key>
@@ -133,7 +151,7 @@
 					<key>filename</key>
 					<string>tests/daubechiesTest.c</string>
 					<key>lastUsed</key>
-					<date>2011-04-15T04:55:24Z</date>
+					<date>2011-04-16T08:09:00Z</date>
 				</dict>
 				<dict>
 					<key>filename</key>
@@ -149,7 +167,7 @@
 					<key>filename</key>
 					<string>tests/splitTest.c</string>
 					<key>lastUsed</key>
-					<date>2011-04-15T08:42:34Z</date>
+					<date>2011-04-16T08:09:02Z</date>
 				</dict>
 			</array>
 			<key>expanded</key>
@@ -162,14 +180,42 @@
 	<integer>200</integer>
 	<key>metaData</key>
 	<dict>
+		<key>CMakeLists.txt</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>46</integer>
+				<key>line</key>
+				<integer>26</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>0</integer>
+		</dict>
 		<key>src/CMakeLists.txt</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>34</integer>
+				<integer>39</integer>
 				<key>line</key>
-				<integer>6</integer>
+				<integer>3</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>0</integer>
+		</dict>
+		<key>src/daubechies.c</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>0</integer>
+				<key>line</key>
+				<integer>0</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
@@ -204,28 +250,14 @@
 			<key>firstVisibleLine</key>
 			<integer>0</integer>
 		</dict>
-		<key>src/pthreads_wavelet.c</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>48</integer>
-				<key>line</key>
-				<integer>54</integer>
-			</dict>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>10</integer>
-		</dict>
 		<key>src/wavelet.c</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>0</integer>
+				<integer>20</integer>
 				<key>line</key>
-				<integer>0</integer>
+				<integer>9</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
@@ -237,9 +269,9 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>57</integer>
+				<integer>0</integer>
 				<key>line</key>
-				<integer>66</integer>
+				<integer>12</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
@@ -251,9 +283,23 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>71</integer>
+				<integer>40</integer>
 				<key>line</key>
-				<integer>16</integer>
+				<integer>9</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>0</integer>
+		</dict>
+		<key>tests/daubechiesTest.c</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>0</integer>
+				<key>line</key>
+				<integer>0</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
@@ -265,9 +311,9 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>20</integer>
+				<integer>25</integer>
 				<key>line</key>
-				<integer>6</integer>
+				<integer>8</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
@@ -293,9 +339,11 @@
 	<array>
 		<string>src/wavelet.h</string>
 		<string>src/wavelet.c</string>
-		<string>src/pthreads_wavelet.c</string>
-		<string>src/CMakeLists.txt</string>
+		<string>src/daubechies.c</string>
+		<string>tests/daubechiesTest.c</string>
 		<string>tests/splitTest.c</string>
+		<string>CMakeLists.txt</string>
+		<string>src/CMakeLists.txt</string>
 		<string>tests/CMakeLists.txt</string>
 		<string>src/haar.c</string>
 		<string>src/haar.h</string>

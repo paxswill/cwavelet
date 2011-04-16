@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 2.6)
 project(cWavelet)
 
 # Build environment
-set(CMAKE_C_FLAGS "-std=c99 -Wall -Wextra -pendantic -fopenmp")
+set(CMAKE_C_FLAGS "-std=c99 -Wall -Wextra -pendantic")
 set(CMAKE_C_FLAGS_DEBUG "-O0 -ggdb")
 set(CMAKE_C_FLAGS_RELEASE "-Os")
 set(CMAKE_C_COMPILER gcc)
@@ -14,3 +14,14 @@ add_subdirectory(tests)
 
 # Testing
 enable_testing()
+
+# Configuration options
+option(USE_OPENMP "Use OpenMP for threading" YES)
+
+if(USE_OPENMP)
+	set(CMAKE_C_FLAGS  "${CMAKE_C_FLAGS} -fopenmp")
+	add_definitions(-DUSE_OPENMP)
+endif(USE_OPENMP)
+
+# Output the configuration
+configure_file(${PROJECT_SOURCE_DIR}/cwavelet-config.h.in ${PROJECT_SOURCE_DIR}/cwavelet-config.h)

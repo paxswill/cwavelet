@@ -9,8 +9,6 @@
 
 #include "wavelet.h"
 
-#define USE_OPENMP
-
 #ifdef USE_PTHREADS
 #warning Using POSIX threads
 #include "pthreads_wavelet.c"

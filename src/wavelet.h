@@ -10,6 +10,7 @@
 #ifndef WAVELET_H_DWTGN12K
 #define WAVELET_H_DWTGN12K
 
+#include "cwavelet-config.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdint.h>

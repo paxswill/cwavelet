@@ -6,6 +6,9 @@ enable_testing()
 # include the source
 include_directories(${CMAKE_SOURCE_DIR}/src)
 
+# Include the definitions file
+include_directories(${CMAKE_SOURCE_DIR})
+
 # Build the testing executables
 add_executable(testLogBase2 logBase2)
 target_link_libraries(testLogBase2 wavelet circ_array)
