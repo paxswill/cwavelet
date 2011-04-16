@@ -7,7 +7,6 @@
  *
  */
 
-#include "wavelet.h"
 
 void liftSplit_single(double *vals, int length){
 	int half = length / 2;
