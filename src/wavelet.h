@@ -64,6 +64,7 @@ void liftTransform(wavelet w, circular_array *inputArray);
 void liftInverse(wavelet w, circular_array *inputArray);
 void liftPredict(wavelet w, circular_array *inputArray, int dir);
 void liftUpdate(wavelet w, circular_array *inputArray, int dir);
+static inline void liftShuffle(double *vals, int length);
 void liftSplit(double *vals, int length);
 void liftMerge(double *vals, int length);
 

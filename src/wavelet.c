@@ -9,6 +9,14 @@
 
 #include "wavelet.h"
 
+#define USE_PTHREADS
+
+#ifdef USE_PTHREADS
+#include "pthreads_wavelet.c"
+#else
+#include "single_wavelet.c"
+#endif
+
 typedef enum{
 	FORWARD_TR = 0,
 	INVERSE_TR = 1
@@ -171,23 +179,21 @@ static inline void liftShuffle(double *vals, int length){
 }
 
 void liftSplit(double *vals, int length){
-	int half = length / 2;
-	// shuffle
-	liftShuffle(vals, length);
-	// Now recurse on each half
-	if(half >= 4){
-		liftSplit(vals, half);
-		liftSplit(vals + half, half);
-	}
+#ifdef USE_PTHREADS
+	// POSIX threads
+	liftSplit_pthread(vals, length);
+#else
+	// Single threaded
+	liftSplit_single(vals, length);
+#endif
 }
 
 void liftMerge(double *vals, int length){
-	int half = length / 2;
-	// Fix the sub-halves first
-	if(half >= 4){
-		liftMerge(vals, half);
-		liftMerge(vals + half, half);
-	}
-	// shuffle
-	liftShuffle(vals, length);
+#ifdef USE_PTHREADS
+	// POSIX threads
+	liftMerge_pthread(vals, length);
+#else
+	// Single threaded
+	liftMerge_single(vals, length);
+#endif
 }
