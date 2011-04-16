@@ -54,7 +54,7 @@ int logBase2(uint32_t num){
 double * transform(wavelet w, double *input, int length){
 	// Pad to a value of 2^n
 	int l2 = logBase2(length);
-	int base2Length = pow(2, l2);
+	int base2Length = pow(2., (double)l2);
 	if(l2 > base2Length){
 		base2Length<<=1;
 	}
