@@ -9,11 +9,16 @@
 
 #include "wavelet.h"
 
-#define USE_PTHREADS
+#define USE_OPENMP
 
 #ifdef USE_PTHREADS
+#warning Using POSIX threads
 #include "pthreads_wavelet.c"
+#elif defined(USE_OPENMP)
+#warning Using OpenMP
+#include "openmp_wavelet.c"
 #else
+#warning Defaulting to a single thread
 #include "single_wavelet.c"
 #endif
 
@@ -182,6 +187,9 @@ void liftSplit(double *vals, int length){
 #ifdef USE_PTHREADS
 	// POSIX threads
 	liftSplit_pthread(vals, length);
+#elif defined(USE_OPENMP)
+	// OpenMP
+	liftSplit_openmp(vals, length);
 #else
 	// Single threaded
 	liftSplit_single(vals, length);
@@ -192,6 +200,9 @@ void liftMerge(double *vals, int length){
 #ifdef USE_PTHREADS
 	// POSIX threads
 	liftMerge_pthread(vals, length);
+#elif defined(USE_OPENMP)
+	// OpenMP
+	liftMerge_openmp(vals, length);
 #else
 	// Single threaded
 	liftMerge_single(vals, length);
