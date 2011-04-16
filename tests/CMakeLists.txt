@@ -14,7 +14,7 @@ target_link_libraries(testHaar wavelet haar circ_array)
 add_executable(testCircularArray circ_arrayTest)
 target_link_libraries(testCircularArray circ_array)
 add_executable(testDaubechies daubechiesTest)
-target_link_libraries(testDaubechies wavelet daubechies haar circ_array)
+target_link_libraries(testDaubechies wavelet daubechies haar circ_array m)
 add_executable(testLiftSplit splitTest)
 target_link_libraries(testLiftSplit wavelet circ_array)
 
