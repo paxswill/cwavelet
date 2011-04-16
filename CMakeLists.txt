@@ -19,20 +19,12 @@ enable_testing()
 option(USE_OPENMP "Use OpenMP for threading" YES)
 
 if(USE_OPENMP)
-	set(CMAKE_C_FLAGS  "${CMAKE_C_FLAGS} -fopenmp")
-	add_definitions(-DUSE_OPENMP)
-	find_library(OMP_LIB_PATH omp)
-	# Check for an OpenMP library called libomp
-	if(OMP_LIB_PATH)
-		set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -L${OMP_LIB_PATH} -lomp")
-	else(OMP_LIB_PATH)
-		# Try for libgomp (GNU OpenMP)
-		find_library(GOMP_LIB_PATH gomp)
-		if(GOMP_LIB_PATH)
-			set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -L${GOMP_LIB_PATH} -lomp")
-		endif(GOMP_LIB_PATH)
-	endif(OMP_LIB_PATH)
-	
+	include(FindOpenMP)
+	if(OPENMP_FOUND)
+		set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${OpenMP_C_FLAGS}")
+		set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
+		set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${OpenMP_EXE_LINKER_FLAGS}")
+	endif()
 endif(USE_OPENMP)
 
 # Output the configuration
