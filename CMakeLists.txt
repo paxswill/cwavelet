@@ -7,6 +7,7 @@ set(CMAKE_C_FLAGS "-std=c99 -Wall -Wextra -pendantic")
 set(CMAKE_C_FLAGS_DEBUG "-O0 -ggdb")
 set(CMAKE_C_FLAGS_RELEASE "-Os")
 set(CMAKE_C_COMPILER gcc)
+set(CMAKE_SHARED_LINKER_FLAGS "-lm")
 
 # Set paths
 add_subdirectory(src)
